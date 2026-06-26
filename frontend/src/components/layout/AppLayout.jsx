@@ -55,7 +55,7 @@ export default function AppLayout() {
       />
       <div className="flex h-screen min-w-0 flex-1 flex-col overflow-hidden transition-all duration-300">
         <Topbar onMenuClick={() => setMobileSidebarOpen(true)} />
-        <main className="min-h-0 flex-1 overflow-y-auto px-4 py-4 lg:px-7 lg:py-6">
+        <main className="min-h-0 flex-1 overflow-y-auto px-4 py-4 lg:px-7 lg:py-6 orbem-fade-in">
           <div className="mx-auto flex w-full max-w-[1680px] flex-col gap-5">
             <Outlet />
           </div>

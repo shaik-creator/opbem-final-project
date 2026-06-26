@@ -196,6 +196,17 @@ textarea:focus-visible {
   outline-offset: 2px;
 }
 
+
+/* Page and content fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.orbem-fade-in {
+  animation: fadeIn 0.2s ease-out both;
+}
+
 @media print {
   .no-print {
     display: none !important;

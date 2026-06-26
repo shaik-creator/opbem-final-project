@@ -29,7 +29,9 @@ export default function Topbar({ onMenuClick }) {
   }
 
   return (
-    <header className="z-20 flex h-16 shrink-0 items-center gap-3 border-b border-[#dbe3ea] bg-white/90 px-4 backdrop-blur-xl lg:px-7">
+    <header className="relative z-20 flex h-16 shrink-0 items-center gap-3 border-b border-[#dbe3ea] bg-white/90 px-4 backdrop-blur-xl lg:px-7">
+      {/* Subtle gradient bottom line */}
+      <span className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#1d9e75]/30 to-transparent" />
       <button
         type="button"
         className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[#dbe3ea] bg-white text-[#64748b] transition hover:bg-[#eef2f5] hover:text-[#111827] lg:hidden"
@@ -40,9 +42,13 @@ export default function Topbar({ onMenuClick }) {
       </button>
 
       <div className="hidden min-w-0 items-center gap-2 sm:flex">
-        <span className="h-2.5 w-2.5 rounded-full bg-[#1d9e75]" />
+        <span className="relative flex h-2.5 w-2.5">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#1d9e75] opacity-50" />
+          <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#1d9e75]" />
+        </span>
         <span className="truncate text-sm font-semibold text-[#172033]">Operations Command Center</span>
       </div>
+
 
       <div className="min-w-0 flex-1" />
 

@@ -4,6 +4,7 @@ import AppLayout from './components/layout/AppLayout';
 import ProtectedRoute from './auth/ProtectedRoute';
 import PublicRoute from './auth/PublicRoute';
 import LoadingState from './components/common/LoadingState';
+import ScrollToTop from './components/common/ScrollToTop';
 import { AuthProvider } from './services/authService';
 import { SocketProvider } from './context/SocketContext';
 import { ROLES } from './constants/roles';
@@ -42,6 +43,7 @@ export default function App() {
     <AuthProvider>
       <SocketProvider>
         <BrowserRouter>
+          <ScrollToTop />
           <Suspense fallback={<LoadingState rows={6} />}>
             <Routes>
               <Route
