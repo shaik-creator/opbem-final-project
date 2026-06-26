@@ -162,7 +162,7 @@ export default function Notifications() {
       {error ? <ErrorState message={error} onRetry={loadNotifications} /> : null}
 
       {loading ? (
-        <LoadingState rows={7} />
+        <LoadingState rows={7} message="Loading alerts and notifications..." />
       ) : notifications.length ? (
         <div className="grid gap-5 xl:grid-cols-2">
           {groups.map(([title, rows]) => (
