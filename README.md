@@ -345,33 +345,47 @@ Frontend runs on `http://localhost:5173`. Backend runs on `http://localhost:5000
 
 ## Deployment
 
-Deploy the frontend on Vercel and deploy the backend separately on Render or Railway. Do not deploy the Express backend inside Vercel.
+Use the free deployment split below:
 
-In Vercel Project Settings, use the Vite frontend deployment only. If Vercel shows a Services/Beta multi-service setup, change the project framework away from Services and redeploy from this repository config.
-
-For Vercel deployment, add this environment variable in Vercel Project Settings:
-
-```env
-VITE_API_BASE_URL=https://your-backend-url.onrender.com
-```
-
-Do not use localhost in production.
-
-Set backend environment variables on Render or Railway:
+1. Create a free MySQL service on Aiven.
+2. Import `backend/database/schema.sql`, then `backend/database/seed.sql` into the Aiven database.
+3. Deploy the backend on Render as a Web Service with root directory `backend`.
+4. Set Render environment variables:
 
 ```env
-PORT
-NODE_ENV
-CORS_ORIGIN
-DB_HOST
-DB_PORT
-DB_USER
-DB_PASSWORD
-DB_NAME
-JWT_SECRET
-GROK_API_KEY
-GROK_MODEL
+PORT=5000
+NODE_ENV=production
+CORS_ORIGIN=https://your-frontend-name.vercel.app
+DB_HOST=your-aiven-mysql-host
+DB_PORT=3306
+DB_USER=your-aiven-user
+DB_PASSWORD=your-aiven-password
+DB_NAME=your-aiven-database
+DB_SSL=true
+JWT_SECRET=use_a_strong_secret
+GROK_API_KEY=your_xai_key_here
+GROK_MODEL=grok-4.3
 ```
+
+5. On Render, use build command `npm install` and start command `npm start`.
+6. Test the backend after deploy:
+
+```env
+https://your-backend-name.onrender.com/api/health
+https://your-backend-name.onrender.com/api/health/db
+```
+
+7. Deploy the frontend on Vercel from the repository root. The root `vercel.json` builds only the React/Vite app in `frontend`.
+8. In Vercel Project Settings, add:
+
+```env
+VITE_API_BASE_URL=https://your-backend-name.onrender.com
+```
+
+9. After Vercel gives you the frontend URL, update Render `CORS_ORIGIN` to that Vercel URL and redeploy the backend.
+10. Test the live app: login, add a booking, update revenue, and upload a file.
+
+Do not use localhost in production. Do not deploy the Express backend inside Vercel. If Vercel shows a Services/Beta multi-service setup, change the project framework away from Services and redeploy from this repository config.
 
 ## Grok Assistant
 

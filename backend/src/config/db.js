@@ -22,7 +22,8 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   namedPlaceholders: true,
   timezone: 'Z',
-  decimalNumbers: true
+  decimalNumbers: true,
+  ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : undefined
 });
 
 function flattenDatabaseErrors(error) {
@@ -57,7 +58,7 @@ function getDatabaseSetupMessage(error) {
     return 'Database tables are missing. Import backend/database/schema.sql, then backend/database/seed.sql.';
   }
 
-  return `Database is unavailable. Start MySQL on ${process.env.DB_HOST || 'localhost'}:3306, then import backend/database/schema.sql and backend/database/seed.sql.`;
+  return `Database is unavailable. Start MySQL on ${process.env.DB_HOST || 'localhost'}:${process.env.DB_PORT || 3306}, then import backend/database/schema.sql and backend/database/seed.sql.`;
 }
 
 function normalizeDatabaseError(error) {
