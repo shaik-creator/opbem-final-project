@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import AppLayout from './components/layout/AppLayout';
 import ProtectedRoute from './auth/ProtectedRoute';
+import PublicRoute from './auth/PublicRoute';
 import LoadingState from './components/common/LoadingState';
 import { AuthProvider } from './services/authService';
 import { SocketProvider } from './context/SocketContext';
@@ -43,8 +44,8 @@ export default function App() {
         <BrowserRouter>
           <Suspense fallback={<LoadingState rows={6} />}>
             <Routes>
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
+              <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
               <Route element={<ProtectedRoute />}>
                 <Route element={<AppLayout />}>
                   <Route index element={<Navigate to="/dashboard" replace />} />
