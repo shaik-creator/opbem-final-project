@@ -43,7 +43,7 @@ export default function BookingTable({
   return (
     <div className="overflow-hidden rounded-lg border border-[#dbe3ea] bg-white shadow-card">
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-[#dbe3ea] text-xs">
+        <table className="min-w-[920px] divide-y divide-[#dbe3ea] text-xs">
           <thead className="bg-[#f8fafc] text-left text-[11px] font-semibold uppercase tracking-[0.03em] text-[#64748b]">
             <tr>
               <th className="w-9 px-3 py-2">
@@ -96,7 +96,7 @@ export default function BookingTable({
                   />
                 </td>
                 <td className="px-3 py-2">
-                  <Link to={detailPath} className="orbem-mono text-[11px] font-bold text-[#0f1f3d] hover:text-[#1d9e75]">
+                  <Link to={detailPath} className="orbem-mono break-words text-[11px] font-bold text-[#0f1f3d] hover:text-[#1d9e75]">
                     {booking.booking_id}
                   </Link>
                   <div className="mt-1 flex items-center gap-1.5">
@@ -106,15 +106,15 @@ export default function BookingTable({
                   </div>
                 </td>
                 <td className="px-3 py-2">
-                  <div className="max-w-[170px] truncate text-xs font-semibold text-[#172033]">{booking.customer_name}</div>
-                  <div className="mt-0.5 max-w-[170px] truncate text-[10px] text-[#64748b]">{booking.customer_phone || booking.company_name}</div>
+                  <div className="max-w-[170px] break-words text-xs font-semibold text-[#172033]">{booking.customer_name}</div>
+                  <div className="mt-0.5 max-w-[170px] break-words text-[10px] text-[#64748b]">{booking.customer_phone || booking.company_name}</div>
                 </td>
                 <td className="px-3 py-2">
                   <div className="text-[13px] font-semibold text-[#172033]">{formatNumber(booking.chargeable_weight, 0)}</div>
                   <div className="text-[10px] text-[#64748b]">kg chargeable</div>
                 </td>
                 <td className="px-3 py-2">
-                  <span className="max-w-[130px] truncate text-[11px] font-semibold text-[#64748b]">{booking.cargo_type || 'Air cargo'}</span>
+                  <span className="block max-w-[130px] break-words text-[11px] font-semibold text-[#64748b]">{booking.cargo_type || 'Air cargo'}</span>
                 </td>
                 <td className="px-3 py-2">
                   <div className="text-[11px] font-medium text-[#172033]">{formatDate(booking.booking_date)}</div>

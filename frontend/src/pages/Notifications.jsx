@@ -40,18 +40,18 @@ function AlertCard({ notification, onRead, onDismiss, onAssign, canAssignTask, c
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
-            <h3 className="text-sm font-semibold text-gray-900">{notification.title}</h3>
+            <h3 className="break-words text-sm font-semibold text-gray-900">{notification.title}</h3>
             <StatusBadge status={notification.severity} />
             <StatusBadge status={notification.type} />
           </div>
-          <p className="mt-2 text-sm text-gray-600">{notification.message}</p>
-          <p className="mt-2 text-xs text-gray-500">
+          <p className="mt-2 break-words text-sm text-gray-600">{notification.message}</p>
+          <p className="mt-2 break-words text-xs text-gray-500">
             {notification.booking_id ? `${notification.booking_id} - ` : ''}{formatDate(notification.created_at)}
           </p>
         </div>
         <div className="flex flex-wrap justify-end gap-2">
           {notification.related_booking_id ? (
-            <Link to={relatedTarget}>
+            <Link to={relatedTarget} className="max-w-full">
               <Button variant="secondary" icon={Eye}>{canViewBooking ? 'View booking' : 'View revenue'}</Button>
             </Link>
           ) : null}
@@ -168,7 +168,7 @@ export default function Notifications() {
           {groups.map(([title, rows]) => (
             <section key={title} className="space-y-3">
               <div className="flex items-center justify-between">
-                <h2 className="text-sm font-semibold text-gray-900">{title}</h2>
+                <h2 className="break-words text-sm font-semibold text-gray-900">{title}</h2>
                 <span className="rounded-full bg-gray-100 px-2.5 py-1 text-xs font-semibold text-gray-600">{rows.length}</span>
               </div>
               {rows.length ? rows.map((notification) => (

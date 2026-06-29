@@ -62,30 +62,55 @@ api.interceptors.response.use(
   }
 );
 
+function getResponseMessage(error) {
+  const message = error.response?.data?.message || error.response?.data?.error || '';
+  return typeof message === 'string' ? message.trim() : '';
+}
+
+function isSafeUserMessage(message) {
+  if (!message || message.length > 180) return false;
+  return ![
+    /^\s*<!doctype/i,
+    /<html/i,
+    /\bat\s+\w+.*:\d+:\d+/i,
+    /stack trace/i,
+    /sql syntax/i,
+    /er_[a-z0-9_]+/i,
+    /axioserror/i,
+    /typeerror/i,
+    /referenceerror/i,
+    /syntaxerror/i
+  ].some((pattern) => pattern.test(message));
+}
+
 export function getErrorMessage(error) {
-  // Request timed out — Render free tier often cold-starts slowly
   if (error.code === 'ECONNABORTED' || error.message?.includes('timeout')) {
-    return 'The server is taking too long to respond. It may be starting up — please wait a moment and try again.';
+    return 'Server is starting. Please wait and retry.';
   }
 
-  // Network error — no response at all
   if (error.code === 'ERR_NETWORK' || error.message === 'Network Error' || !error.response) {
-    return 'Unable to reach the server. Please check your connection and try again.';
+    return 'Unable to load data. Please try again.';
   }
+
+  const responseMessage = getResponseMessage(error);
 
   if (error.response?.status === 401) {
-    return error.response?.data?.message || 'Invalid email or password.';
+    return isSafeUserMessage(responseMessage) ? responseMessage : 'Invalid email or password.';
   }
 
   if (error.response?.status === 503) {
-    return 'The server is starting up. Please wait a moment and refresh the page.';
+    return 'Server is starting. Please wait and retry.';
   }
 
   if (error.response?.status >= 500) {
-    return error.response?.data?.message || 'A server error occurred. Please try again in a moment.';
+    return 'Unable to load data. Please try again.';
   }
 
-  return error.response?.data?.message || error.message || 'Request failed. Please try again.';
+  if ([400, 403, 404, 409, 422].includes(error.response?.status) && isSafeUserMessage(responseMessage)) {
+    return responseMessage;
+  }
+
+  return 'Unable to load data. Please try again.';
 }
 
 export async function downloadFile(path, filename) {

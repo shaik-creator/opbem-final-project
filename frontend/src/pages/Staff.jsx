@@ -44,33 +44,35 @@ export default function Staff() {
         <LoadingState rows={7} />
       ) : staff.length ? (
         <div className="overflow-hidden rounded-lg border border-[#dbe3ea] bg-white shadow-card">
-          <table className="min-w-full divide-y divide-[#edf2f7] text-left text-sm">
-            <thead className="bg-[#f8fafc] text-xs font-semibold uppercase tracking-wide text-[#64748b]">
-              <tr>
-                <th className="px-4 py-3">Name</th>
-                <th className="px-4 py-3">Email</th>
-                <th className="px-4 py-3">Role</th>
-                <th className="px-4 py-3">Phone</th>
-                <th className="px-4 py-3">Status</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[#edf2f7]">
-              {staff.map((member) => (
-                <tr key={member.id || member.user_id} className="hover:bg-[#f8fafc]">
-                  <td className="px-4 py-3">
-                    <span className="inline-flex items-center gap-2 font-semibold text-[#172033]">
-                      <UsersRound className="h-4 w-4 text-[#64748b]" />
-                      {member.name || member.staff_name || '-'}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3 text-[#64748b]">{member.email || '-'}</td>
-                  <td className="px-4 py-3">{roleLabel(member.role)}</td>
-                  <td className="px-4 py-3 text-[#64748b]">{member.phone || '-'}</td>
-                  <td className="px-4 py-3"><StatusBadge status={member.status || (member.is_active ? 'Active' : 'Inactive')} /></td>
+          <div className="overflow-x-auto">
+            <table className="min-w-[720px] divide-y divide-[#edf2f7] text-left text-sm">
+              <thead className="bg-[#f8fafc] text-xs font-semibold uppercase tracking-wide text-[#64748b]">
+                <tr>
+                  <th className="px-4 py-3">Name</th>
+                  <th className="px-4 py-3">Email</th>
+                  <th className="px-4 py-3">Role</th>
+                  <th className="px-4 py-3">Phone</th>
+                  <th className="px-4 py-3">Status</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-[#edf2f7]">
+                {staff.map((member) => (
+                  <tr key={member.id || member.user_id} className="hover:bg-[#f8fafc]">
+                    <td className="px-4 py-3">
+                      <span className="inline-flex min-w-0 items-center gap-2 break-words font-semibold text-[#172033]">
+                        <UsersRound className="h-4 w-4 shrink-0 text-[#64748b]" />
+                        {member.name || member.staff_name || '-'}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 break-words text-[#64748b]">{member.email || '-'}</td>
+                    <td className="px-4 py-3">{roleLabel(member.role)}</td>
+                    <td className="px-4 py-3 break-words text-[#64748b]">{member.phone || '-'}</td>
+                    <td className="px-4 py-3"><StatusBadge status={member.status || (member.is_active ? 'Active' : 'Inactive')} /></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       ) : (
         <EmptyState title="No staff records" message="Staff records will appear once users or staff profiles are available." />

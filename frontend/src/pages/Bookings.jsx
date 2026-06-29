@@ -295,9 +295,9 @@ export default function Bookings() {
     <div className="space-y-4 text-[13px]">
       <Toast message={toast} onClose={() => setToast('')} />
       <div className="flex flex-wrap items-center gap-3">
-        <div>
-          <h1 className="text-[17px] font-semibold text-[#172033]">{isShipmentsPage ? 'Shipment Operations' : 'Bookings'}</h1>
-          <p className="mt-1 text-xs text-[#64748b]">{bookings.length || 'No'} active bookings - updated just now</p>
+        <div className="min-w-0">
+          <h1 className="break-words text-[17px] font-semibold text-[#172033]">{isShipmentsPage ? 'Shipment Operations' : 'Bookings'}</h1>
+          <p className="mt-1 break-words text-xs text-[#64748b]">{bookings.length || 'No'} active bookings - updated just now</p>
         </div>
         <div className="flex-1" />
         <button
@@ -312,21 +312,21 @@ export default function Bookings() {
         </button>
         {isAdmin && <Button variant="secondary" icon={Upload}>Import</Button>}
         {isAdmin && <Button variant="secondary" icon={Download} onClick={() => downloadFile('/reports/bookings.csv', 'bookings-report.csv')}>Export</Button>}
-        {canCreateBooking && <Link to="/bookings/new"><Button icon={Plus} className="bg-[#0f1f3d] hover:bg-[#1a3258]">New booking</Button></Link>}
+        {canCreateBooking && <Link to="/bookings/new" className="max-w-full"><Button icon={Plus} className="bg-[#0f1f3d] hover:bg-[#1a3258]">New booking</Button></Link>}
       </div>
 
-      <div className="grid grid-cols-2 gap-2 md:grid-cols-5">
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
         {statCards.map(([label, value, color]) => (
           <div key={label} className="rounded-lg border border-[#dbe3ea] bg-white px-3 py-3 text-center shadow-sm">
-            <p className="text-lg font-semibold" style={{ color }}>{value}</p>
-            <p className="mt-0.5 text-[10px] font-medium text-[#64748b]">{label}</p>
+            <p className="break-words text-lg font-semibold" style={{ color }}>{value}</p>
+            <p className="mt-0.5 break-words text-[10px] font-medium text-[#64748b]">{label}</p>
           </div>
         ))}
       </div>
 
       <div className="rounded-lg border border-[#dbe3ea] bg-white p-3 shadow-card">
         <div className="flex flex-wrap items-center gap-2">
-          <label className="flex min-h-9 min-w-[240px] flex-1 items-center gap-2 rounded-lg border border-[#dbe3ea] bg-[#f8fafc] px-3 text-xs">
+          <label className="flex min-h-9 min-w-0 flex-1 items-center gap-2 rounded-lg border border-[#dbe3ea] bg-[#f8fafc] px-3 text-xs sm:min-w-[240px]">
             <Search className="h-4 w-4 text-[#94a3b8]" />
             <input
               className="h-9 min-w-0 flex-1 border-0 bg-transparent p-0 text-xs font-medium text-[#172033] outline-none placeholder:text-[#94a3b8] focus:ring-0"
@@ -362,7 +362,7 @@ export default function Bookings() {
           </button>
         </div>
 
-        <div className="mt-3 grid gap-3 md:grid-cols-4 xl:grid-cols-7">
+        <div className="mt-3 grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7">
           <LocationAutocompleteInput label="Origin" value={filters.origin} onChange={updateOrigin} onSelect={selectOriginLocation} selectionValue="code" maxLength={12} placeholder="City/code" />
           <LocationAutocompleteInput label="Destination" value={filters.destination} onChange={updateDestination} onSelect={selectDestinationLocation} selectionValue="code" maxLength={12} placeholder="City/code" />
           <Select label="Owner" value={filters.owner} onChange={(e) => updateFilter('owner', e.target.value)}>
@@ -371,7 +371,7 @@ export default function Bookings() {
           </Select>
           <Input label="From" type="date" value={filters.dateFrom} onChange={(e) => updateFilter('dateFrom', e.target.value)} />
           <Input label="To" type="date" value={filters.dateTo} onChange={(e) => updateFilter('dateTo', e.target.value)} />
-          <div className="flex items-end gap-2 xl:col-span-2 xl:justify-end">
+          <div className="flex flex-wrap items-end gap-2 xl:col-span-2 xl:justify-end">
             <Button variant="secondary" icon={X} onClick={clearFilters}>Clear</Button>
             <Button icon={Search} onClick={() => loadBookings()} className="bg-[#0f1f3d] hover:bg-[#1a3258]">Search</Button>
           </div>
@@ -397,7 +397,7 @@ export default function Bookings() {
           )}
           <Select
             aria-label={`Assign owner to selected ${selectedLabel}`}
-            className="w-48 text-xs"
+            className="w-full text-xs sm:w-48"
             value={bulkOwnerId}
             onChange={(event) => setBulkOwnerId(event.target.value)}
           >

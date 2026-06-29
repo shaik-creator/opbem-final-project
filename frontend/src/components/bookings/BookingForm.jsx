@@ -153,7 +153,7 @@ export default function BookingForm({ initialData, owners = [], onSubmit, submit
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid min-w-0 gap-4 md:grid-cols-2">
         <Input label="Customer name" value={form.customer_name} error={errors.customer_name} onChange={(e) => updateField('customer_name', e.target.value)} />
         <Input label="Company name" value={form.company_name} error={errors.company_name} onChange={(e) => updateField('company_name', e.target.value)} />
         <Input label="Customer email" type="email" value={form.customer_email} error={errors.customer_email} onChange={(e) => updateField('customer_email', e.target.value)} />
@@ -192,7 +192,7 @@ export default function BookingForm({ initialData, owners = [], onSubmit, submit
         </Select>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-5">
+      <div className="grid min-w-0 gap-4 sm:grid-cols-2 lg:grid-cols-5">
         <Input label="Packages" type="number" min="1" value={form.package_count} error={errors.package_count} onChange={(e) => updateField('package_count', e.target.value)} />
         <Input label="Actual kg" type="number" min="0" step="0.01" value={form.actual_weight} error={errors.actual_weight} onChange={(e) => updateField('actual_weight', e.target.value)} />
         <Input label="Length cm" type="number" min="0" step="0.01" value={form.length_cm} error={errors.length_cm} onChange={(e) => updateField('length_cm', e.target.value)} />
@@ -201,7 +201,7 @@ export default function BookingForm({ initialData, owners = [], onSubmit, submit
       </div>
 
       <div className="rounded-md border border-gray-200 bg-gray-50 p-4 text-sm">
-        <div className="grid gap-3 sm:grid-cols-2">
+        <div className="grid min-w-0 gap-3 sm:grid-cols-2">
           <p>
             <span className="font-medium text-gray-700">Volumetric weight:</span> {formatNumber(weights.volumetric)} kg
           </p>
@@ -211,14 +211,14 @@ export default function BookingForm({ initialData, owners = [], onSubmit, submit
         </div>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-4">
+      <div className="grid min-w-0 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Select label="Shipment status" value={form.shipment_status} onChange={(e) => updateField('shipment_status', e.target.value)} options={statuses} />
         <Select label="Priority" value={form.priority} onChange={(e) => updateField('priority', e.target.value)} options={priorities} />
         <Input label="Booking date" type="date" value={form.booking_date} error={errors.booking_date} onChange={(e) => updateField('booking_date', e.target.value)} />
         <Input label="Expected delivery" type="date" value={form.expected_delivery_date} error={errors.expected_delivery_date} onChange={(e) => updateField('expected_delivery_date', e.target.value)} />
       </div>
 
-      <div className="grid gap-4 md:grid-cols-4">
+      <div className="grid min-w-0 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Input label="Actual delivery" type="date" value={form.actual_delivery_date || ''} onChange={(e) => updateField('actual_delivery_date', e.target.value)} />
         <Input label="Quotation amount" type="number" min="0" step="0.01" value={form.quotation_amount || 0} onChange={(e) => updateField('quotation_amount', e.target.value)} />
         <Input label="Invoice amount" type="number" min="0" step="0.01" value={form.invoice_amount || 0} onChange={(e) => updateField('invoice_amount', e.target.value)} />
@@ -228,7 +228,7 @@ export default function BookingForm({ initialData, owners = [], onSubmit, submit
       <label className="block text-sm">
         <span className="mb-1 block font-medium text-gray-700">Cargo description</span>
         <textarea
-          className="min-h-24 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500"
+          className="min-h-24 w-full min-w-0 rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500"
           value={form.cargo_description || ''}
           onChange={(e) => updateField('cargo_description', e.target.value)}
         />
@@ -236,13 +236,13 @@ export default function BookingForm({ initialData, owners = [], onSubmit, submit
       <label className="block text-sm">
         <span className="mb-1 block font-medium text-gray-700">Notes</span>
         <textarea
-          className="min-h-20 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500"
+          className="min-h-20 w-full min-w-0 rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500"
           value={form.notes || ''}
           onChange={(e) => updateField('notes', e.target.value)}
         />
       </label>
 
-      <div className="flex justify-end">
+      <div className="flex flex-wrap justify-end gap-2">
         <Button type="submit" loading={submitting}>
           {submitLabel}
         </Button>

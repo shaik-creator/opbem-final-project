@@ -40,8 +40,8 @@ function formatValue(type, value) {
 function Panel({ title, action, children }) {
   return (
     <section className="overflow-hidden rounded-lg border border-[#dbe3ea] bg-white shadow-card">
-      <div className="flex items-center justify-between gap-3 border-b border-[#dbe3ea] px-4 py-3">
-        <h2 className="truncate text-sm font-semibold text-[#111827]">{title}</h2>
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#dbe3ea] px-4 py-3">
+        <h2 className="min-w-0 break-words text-sm font-semibold text-[#111827]">{title}</h2>
         {action}
       </div>
       <div className="p-4">{children}</div>
@@ -56,7 +56,7 @@ function RecentBookings({ rows = [], title = 'Operational queue' }) {
 
   return (
     <div className="overflow-x-auto">
-      <table className="min-w-full text-left text-sm">
+      <table className="min-w-[720px] text-left text-sm">
         <thead>
           <tr className="border-b border-[#dbe3ea] bg-[#f8fafc] text-[11px] font-semibold uppercase tracking-wide text-[#64748b]">
             <th className="px-3 py-2">{title}</th>
@@ -76,7 +76,7 @@ function RecentBookings({ rows = [], title = 'Operational queue' }) {
                   {row.origin_airport || '---'} to {row.destination_airport || '---'}
                 </p>
               </td>
-              <td className="px-3 py-2 text-[#111827]">{row.company_name || row.customer_name || '-'}</td>
+              <td className="px-3 py-2 break-words text-[#111827]">{row.company_name || row.customer_name || '-'}</td>
               <td className="px-3 py-2"><StatusBadge status={row.shipment_status || row.current_status || 'Pending'} /></td>
               <td className="px-3 py-2 text-[#64748b]">{formatDate(row.expected_delivery_date)}</td>
             </tr>
@@ -134,7 +134,7 @@ export default function RoleDashboardBase({ title, subtitle, statusText, cards, 
         })}
       </div>
 
-      <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_360px]">
+      <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_minmax(0,360px)]">
         <Panel
           title={queueTitle || 'Current work'}
           action={<Link to="/shipments" className="text-xs font-semibold text-[#1d9e75] hover:underline">Open shipments</Link>}
@@ -148,7 +148,7 @@ export default function RoleDashboardBase({ title, subtitle, statusText, cards, 
               <Link
                 key={link.to}
                 to={link.to}
-                className="flex items-center justify-between rounded-lg border border-[#dbe3ea] bg-[#f8fafc] px-3 py-2 text-sm font-semibold text-[#172033] transition hover:border-[#b8c7d6] hover:bg-white"
+                className="flex min-w-0 flex-wrap items-center justify-between gap-2 rounded-lg border border-[#dbe3ea] bg-[#f8fafc] px-3 py-2 text-sm font-semibold text-[#172033] transition hover:border-[#b8c7d6] hover:bg-white"
               >
                 {link.label}
                 <span className="text-xs text-[#64748b]">{link.hint}</span>

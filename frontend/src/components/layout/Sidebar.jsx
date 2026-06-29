@@ -97,7 +97,7 @@ export default function Sidebar({ open, collapsed = true, onClose, onExpand, onC
         onMouseEnter={onExpand}
         onMouseLeave={onCollapse}
         className={classNames(
-          'fixed inset-y-0 left-0 z-40 flex h-screen w-[278px] shrink-0 transform flex-col overflow-hidden bg-[#071226] text-white shadow-2xl transition-[width,transform] duration-300 ease-out lg:sticky lg:top-0 lg:translate-x-0',
+          'fixed inset-y-0 left-0 z-40 flex h-screen w-[min(278px,calc(100vw-1rem))] shrink-0 transform flex-col overflow-hidden bg-[#071226] text-white shadow-2xl transition-[width,transform] duration-300 ease-out lg:sticky lg:top-0 lg:w-[278px] lg:translate-x-0',
           collapsed ? 'lg:w-[76px]' : 'lg:w-[278px]',
           open ? 'translate-x-0' : '-translate-x-full'
         )}
@@ -177,7 +177,7 @@ export default function Sidebar({ open, collapsed = true, onClose, onExpand, onC
           </NavLink>
         </div>
       </aside>
-      {open ? <button className="fixed inset-0 z-30 bg-gray-900/40 lg:hidden" onClick={onClose} aria-label="Close sidebar" /> : null}
+      {open ? <button type="button" className="fixed inset-0 z-30 bg-gray-900/40 lg:hidden" onClick={onClose} aria-label="Close sidebar" /> : null}
     </>
   );
 }

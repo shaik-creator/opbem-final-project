@@ -40,8 +40,8 @@ const statuses = ['Booked', 'Picked Up', 'In Warehouse', 'Documents Pending', 'R
 function DetailCard({ title, icon: Icon, action, children }) {
   return (
     <section className="overflow-hidden rounded-lg border border-[#dbe3ea] bg-white shadow-card">
-      <div className="flex items-center justify-between gap-3 border-b border-[#edf2f7] px-4 py-3">
-        <h2 className="flex items-center gap-2 text-[13px] font-semibold text-[#172033]">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#edf2f7] px-4 py-3">
+        <h2 className="flex min-w-0 items-center gap-2 break-words text-[13px] font-semibold text-[#172033]">
           {Icon ? <Icon className="h-4 w-4 text-[#64748b]" /> : null}
           {title}
         </h2>
@@ -71,7 +71,7 @@ function InfoGrid({ booking }) {
       {rows.map(([label, value, tone], index) => (
         <div key={label} className={classNames('border-b border-[#edf2f7] px-4 py-3 sm:odd:border-r', index >= rows.length - 2 ? 'sm:border-b-0' : '')}>
           <p className="text-[10px] font-semibold uppercase tracking-[0.03em] text-[#64748b]">{label}</p>
-          <p className={classNames('mt-1 text-[13px] font-semibold text-[#172033]', tone === 'mono' ? 'orbem-mono text-xs' : '', tone === 'green' ? 'text-[#1d9e75]' : '')}>{value || '-'}</p>
+          <p className={classNames('mt-1 break-words text-[13px] font-semibold text-[#172033]', tone === 'mono' ? 'orbem-mono text-xs' : '', tone === 'green' ? 'text-[#1d9e75]' : '')}>{value || '-'}</p>
         </div>
       ))}
     </div>
@@ -129,13 +129,13 @@ function DocumentsCard({ documents }) {
           const item = meta[document.status] || meta.Pending;
           const Icon = item.icon;
           return (
-            <div key={document.id} className="flex items-center gap-3 px-4 py-3">
+            <div key={document.id} className="flex min-w-0 items-center gap-3 px-4 py-3">
               <span className={classNames('flex h-8 w-8 shrink-0 items-center justify-center rounded-lg', item.className)}>
                 <Icon className="h-4 w-4" />
               </span>
               <div className="min-w-0 flex-1">
-                <p className="truncate text-xs font-semibold text-[#172033]">{document.document_type}</p>
-                <p className="mt-0.5 truncate text-[10px] text-[#64748b]">{document.file_name || 'Metadata pending'}</p>
+                <p className="break-words text-xs font-semibold text-[#172033]">{document.document_type}</p>
+                <p className="mt-0.5 break-words text-[10px] text-[#64748b]">{document.file_name || 'Metadata pending'}</p>
               </div>
               <StatusBadge status={document.status} />
             </div>
@@ -170,8 +170,8 @@ function PaymentSummaryCard({ booking }) {
       <div className="divide-y divide-[#edf2f7]">
         {rows.map(([label, value, tone]) => (
           <div key={label} className={classNames('flex items-center justify-between gap-3 px-4 py-3', tone === 'strong' ? 'bg-[#f8fafc]' : '')}>
-            <p className="text-[11px] font-medium text-[#64748b]">{label}</p>
-            <p className={classNames('text-[13px] font-semibold text-[#172033]', tone === 'green' ? 'text-[#1d9e75]' : '', tone === 'red' ? 'text-[#e24b4a]' : '', tone === 'strong' ? 'text-[15px]' : '')}>{value}</p>
+            <p className="break-words text-[11px] font-medium text-[#64748b]">{label}</p>
+            <p className={classNames('break-words text-right text-[13px] font-semibold text-[#172033]', tone === 'green' ? 'text-[#1d9e75]' : '', tone === 'red' ? 'text-[#e24b4a]' : '', tone === 'strong' ? 'text-[15px]' : '')}>{value}</p>
           </div>
         ))}
       </div>
@@ -193,9 +193,9 @@ function CustomerCard({ booking }) {
       <div className="flex gap-3 px-4 py-4">
         <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#e6f1fb] text-xs font-bold text-[#185fa5]">{initials}</span>
         <div className="min-w-0">
-          <p className="truncate text-[13px] font-semibold text-[#172033]">{booking.company_name || booking.customer_name}</p>
-          <p className="mt-1 truncate text-[11px] text-[#64748b]">{booking.customer_email || '-'}</p>
-          <p className="mt-1 truncate text-[11px] text-[#64748b]">{booking.customer_phone || '-'}</p>
+          <p className="break-words text-[13px] font-semibold text-[#172033]">{booking.company_name || booking.customer_name}</p>
+          <p className="mt-1 break-words text-[11px] text-[#64748b]">{booking.customer_email || '-'}</p>
+          <p className="mt-1 break-words text-[11px] text-[#64748b]">{booking.customer_phone || '-'}</p>
           <div className="mt-2 flex flex-wrap gap-2">
             <span className="rounded-full bg-[#eaf3de] px-2 py-0.5 text-[10px] font-bold text-[#3b6d11]">Priority client</span>
             <span className="rounded-full bg-[#e6f1fb] px-2 py-0.5 text-[10px] font-bold text-[#185fa5]">{booking.pickup_city || 'Origin'} to {booking.delivery_city || 'Destination'}</span>
@@ -303,7 +303,7 @@ export default function BookingDetailPage() {
 
   return (
     <div className="space-y-4 text-[13px]">
-      <nav className="flex items-center gap-1.5 text-[11px] font-medium text-[#64748b]">
+      <nav className="flex flex-wrap items-center gap-1.5 text-[11px] font-medium text-[#64748b]">
         <Link to="/" className="hover:text-[#172033]">Dashboard</Link>
         <ChevronRight className="h-3 w-3" />
         <Link to={listPath} className="hover:text-[#172033]">{listLabel}</Link>
@@ -331,7 +331,7 @@ export default function BookingDetailPage() {
 
       {error ? <ErrorState message={error} /> : null}
 
-      <div className="grid gap-4 xl:grid-cols-[minmax(0,1.35fr)_minmax(340px,0.85fr)]">
+      <div className="grid gap-4 xl:grid-cols-[minmax(0,1.35fr)_minmax(0,0.85fr)]">
         <div className="space-y-4">
           <DetailCard title="Cargo details" icon={Package} action={canEditBooking ? <button type="button" onClick={() => setSearchParams({ edit: '1' })}>Edit</button> : null}>
             <InfoGrid booking={data.booking} />
@@ -346,10 +346,10 @@ export default function BookingDetailPage() {
         </div>
       </div>
 
-      <div className={classNames('grid gap-4', canEditRevenue ? 'xl:grid-cols-[420px_1fr]' : 'xl:grid-cols-1')}>
+      <div className={classNames('grid gap-4', canEditRevenue ? 'xl:grid-cols-[minmax(0,420px)_minmax(0,1fr)]' : 'xl:grid-cols-1')}>
         {canUpdateShipment && (
         <div className="rounded-lg border border-[#dbe3ea] bg-white p-5 shadow-card">
-          <div className="flex items-center justify-between gap-3">
+          <div className="flex flex-wrap items-center justify-between gap-3">
             <h2 className="text-sm font-semibold text-[#172033]">Update Shipment Status</h2>
             <Button variant="secondary" icon={RefreshCw} onClick={loadBooking} className="min-h-9 px-3 text-xs">Refresh</Button>
           </div>
@@ -376,7 +376,7 @@ export default function BookingDetailPage() {
         <DocumentChecklist bookingId={data.booking.id} />
       </div>
 
-      {canDeleteBooking && <div className="flex justify-end">
+      {canDeleteBooking && <div className="flex flex-wrap justify-end gap-2">
         <Button variant="danger" icon={Trash2} onClick={deleteBooking}>Delete booking</Button>
       </div>}
 

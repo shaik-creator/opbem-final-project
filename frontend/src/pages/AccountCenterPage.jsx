@@ -167,8 +167,8 @@ function SettingsAppHeader({
       <div className="flex min-h-11 items-center gap-3">
         <HeaderIconButton label="Back" icon={ArrowLeft} onClick={onBack} />
         <div className="min-w-0 flex-1">
-          <h1 className="truncate text-xl font-black text-[#0f1f3d]">{title}</h1>
-          {subtitle ? <p className="truncate text-sm font-medium text-[#64748b]">{subtitle}</p> : null}
+          <h1 className="break-words text-xl font-black text-[#0f1f3d]">{title}</h1>
+          {subtitle ? <p className="break-words text-sm font-medium text-[#64748b]">{subtitle}</p> : null}
         </div>
         {onSearchToggle ? <HeaderIconButton label={searchOpen ? 'Close search' : 'Search settings'} icon={searchOpen ? X : Search} onClick={onSearchToggle} /> : null}
       </div>
@@ -199,8 +199,8 @@ function SettingsProfileButton({ user, profile, onEdit }) {
     >
       <Avatar name={user?.name} avatarUrl={profile?.avatarUrl} size="h-16 w-16" className="ring-2" />
       <span className="min-w-0 flex-1">
-        <span className="block truncate text-lg font-black text-[#0f1f3d]">{user?.name || 'Ops User'}</span>
-        <span className="mt-1 block truncate text-sm font-medium text-[#64748b]">{status}</span>
+        <span className="block break-words text-lg font-black text-[#0f1f3d]">{user?.name || 'Ops User'}</span>
+        <span className="mt-1 block break-words text-sm font-medium text-[#64748b]">{status}</span>
         <span className="mt-2 flex flex-wrap items-center gap-2">
           <span className="inline-flex max-w-full items-center rounded-full bg-[#ecfdf5] px-2.5 py-1 text-xs font-bold text-[#0f766e]">
             {user?.role || 'Operations'}
@@ -306,7 +306,7 @@ function DesktopSettingsShell({ user, profile, items, activeKey, onSelect, child
   const itemMap = new Map(items.map((item) => [item.key, item]));
 
   return (
-    <section className="hidden min-h-[560px] overflow-hidden rounded-[18px] border border-[#dbe3ea] bg-white shadow-[0_24px_60px_rgba(15,31,61,0.10)] lg:grid lg:grid-cols-[220px_minmax(0,1fr)]">
+    <section className="hidden min-h-[560px] overflow-hidden rounded-[18px] border border-[#dbe3ea] bg-white shadow-[0_24px_60px_rgba(15,31,61,0.10)] lg:grid lg:grid-cols-[minmax(0,220px)_minmax(0,1fr)]">
       <aside className="border-r border-[#edf2f7] bg-[#f8fafc]">
         <div className="flex flex-col items-center gap-2 border-b border-[#edf2f7] px-4 py-5 text-center">
           <Avatar name={user?.name} avatarUrl={profile?.avatarUrl} size="h-14 w-14" className="ring-2" />
@@ -358,7 +358,7 @@ function ProfileSummaryCard({ user, profile, onEdit, onChangePhoto, onSecurity }
   const location = profile?.department || 'Operations workspace';
 
   return (
-    <section className="overflow-hidden rounded-[24px] border border-[#dbe3ea] bg-white shadow-[0_18px_50px_rgba(15,31,61,0.10)]">
+    <section className="min-w-0 overflow-hidden rounded-[24px] border border-[#dbe3ea] bg-white shadow-[0_18px_50px_rgba(15,31,61,0.10)]">
       <div className="h-24 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.55),transparent_35%),linear-gradient(135deg,#102a55,#0b1730_55%,#0f766e)]" />
       <div className="-mt-11 px-5 pb-5">
         <div className="flex items-end justify-between gap-3">
@@ -370,8 +370,8 @@ function ProfileSummaryCard({ user, profile, onEdit, onChangePhoto, onSecurity }
         </div>
 
         <div className="mt-4 min-w-0">
-          <h2 className="truncate text-xl font-bold text-[#0f1f3d]">{user?.name || 'Ops User'}</h2>
-          <p className="mt-1 truncate text-sm font-medium text-[#64748b]">{profile?.designation || user?.role || 'Operations Staff'}</p>
+          <h2 className="break-words text-xl font-bold text-[#0f1f3d]">{user?.name || 'Ops User'}</h2>
+          <p className="mt-1 break-words text-sm font-medium text-[#64748b]">{profile?.designation || user?.role || 'Operations Staff'}</p>
         </div>
 
         <div className="mt-4 space-y-2 text-sm text-[#344054]">
@@ -398,15 +398,15 @@ function ProfileSummaryCard({ user, profile, onEdit, onChangePhoto, onSecurity }
           <p className="mt-1 text-sm font-semibold text-[#172033]">{status}</p>
         </div>
 
-        <div className="mt-4 grid grid-cols-3 gap-2 text-center">
+        <div className="mt-4 grid grid-cols-1 gap-2 text-center sm:grid-cols-3">
           {[
             ['Access', user?.role || 'Staff'],
             ['Workspace', 'Team'],
             ['Account', user?.is_active === 0 ? 'Inactive' : 'Active']
           ].map(([label, value]) => (
             <div key={label} className="rounded-2xl border border-[#dbe3ea] bg-white px-2 py-3">
-              <p className="truncate text-xs font-semibold text-[#64748b]">{label}</p>
-              <p className="mt-1 truncate text-sm font-bold text-[#0f1f3d]">{value}</p>
+              <p className="break-words text-xs font-semibold text-[#64748b]">{label}</p>
+              <p className="mt-1 break-words text-sm font-bold text-[#0f1f3d]">{value}</p>
             </div>
           ))}
         </div>
@@ -423,7 +423,7 @@ function ProfileSummaryCard({ user, profile, onEdit, onChangePhoto, onSecurity }
 
 function SettingsSectionNav({ items, activeKey, onSelect }) {
   return (
-    <nav className="rounded-[24px] border border-[#dbe3ea] bg-white p-2 shadow-[0_16px_38px_rgba(15,31,61,0.08)]" aria-label="Account center sections">
+    <nav className="min-w-0 rounded-[24px] border border-[#dbe3ea] bg-white p-2 shadow-[0_16px_38px_rgba(15,31,61,0.08)]" aria-label="Account center sections">
       <div className="grid gap-1 sm:grid-cols-2 xl:grid-cols-1">
         {items.map((item) => {
           const Icon = item.icon;
@@ -981,7 +981,7 @@ export default function AccountCenterPage() {
 
   if (loading) {
     return (
-      <div className="-mx-4 w-auto sm:mx-auto sm:w-full sm:max-w-[820px]">
+      <div className="mx-auto w-full max-w-[820px]">
         <LoadingState rows={9} />
       </div>
     );
@@ -1051,7 +1051,7 @@ export default function AccountCenterPage() {
   const desktopActiveItem = sectionItems.find((item) => item.key === desktopActiveKey) || sectionItems[0];
 
   return (
-    <div className="-mx-4 w-auto pb-6 sm:mx-auto sm:w-full sm:max-w-[860px] lg:max-w-[820px]">
+    <div className="mx-auto w-full max-w-[860px] pb-6 lg:max-w-[820px]">
       <Toast message={toast} onClose={() => setToast('')} />
 
       {error ? <div className="mb-4 px-4 sm:px-0"><ErrorState title="Account center notice" message={error} onRetry={loadSettings} /></div> : null}
@@ -1072,7 +1072,7 @@ export default function AccountCenterPage() {
         </div>
       </DesktopSettingsShell>
 
-      <section className="min-h-[calc(100vh-5.25rem)] overflow-hidden border-y border-[#dbe3ea] bg-white shadow-[0_24px_60px_rgba(15,31,61,0.10)] sm:min-h-0 sm:rounded-[30px] sm:border lg:hidden">
+      <section className="min-h-[calc(100vh-5.25rem)] max-w-full overflow-hidden border border-[#dbe3ea] bg-white shadow-[0_24px_60px_rgba(15,31,61,0.10)] sm:min-h-0 sm:rounded-[30px] lg:hidden">
         {showingDetail ? (
           <DetailSettingsView item={activeItem} onBack={showMainSettings}>
             {sections[activeKey]}

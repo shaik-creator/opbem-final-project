@@ -78,7 +78,7 @@ export default function Payments() {
   return (
     <div className="space-y-6">
       <PageHeader title="Revenue" description="Invoice, collection, balance, overdue, partial, and paid payment tracking." actions={<Button variant="secondary" icon={RefreshCw} onClick={loadPayments}>Refresh</Button>} />
-      <div className="grid gap-4 md:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <SummaryCard title="Invoiced" value={formatCurrency(summary.invoice)} icon={CreditCard} trend={[1, 3, 5, summary.invoice / 10000]} />
         <SummaryCard title="Received" value={formatCurrency(summary.paid)} icon={Wallet} tone="#059669" trend={[1, 2, 4, summary.paid / 10000]} />
         <SummaryCard title="Pending" value={formatCurrency(summary.balance)} icon={Wallet} tone="#d97706" trend={[4, 3, 2, summary.balance / 10000]} />
@@ -98,7 +98,7 @@ export default function Payments() {
       ) : visiblePayments.length ? (
         <div className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-card">
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200 text-sm">
+            <table className="min-w-[920px] divide-y divide-gray-200 text-sm">
               <thead className="bg-gray-50 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
                 <tr>
                   <th className="px-4 py-3">Booking</th>
@@ -114,10 +114,10 @@ export default function Payments() {
               <tbody className="divide-y divide-gray-100">
                 {visiblePayments.map((payment) => (
                   <tr key={payment.id} className="hover:bg-gray-50">
-                    <td className="px-4 py-3 font-medium text-gray-900">{payment.booking_code}</td>
+                    <td className="px-4 py-3 break-words font-medium text-gray-900">{payment.booking_code}</td>
                     <td className="px-4 py-3">
-                      <div className="font-medium text-gray-900">{payment.customer_name}</div>
-                      <div className="text-xs text-gray-500">{payment.company_name}</div>
+                      <div className="break-words font-medium text-gray-900">{payment.customer_name}</div>
+                      <div className="break-words text-xs text-gray-500">{payment.company_name}</div>
                     </td>
                     <td className="px-4 py-3">{formatCurrency(payment.invoice_amount)}</td>
                     <td className="px-4 py-3">{formatCurrency(payment.paid_amount)}</td>

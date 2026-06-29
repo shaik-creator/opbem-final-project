@@ -128,8 +128,8 @@ export default function Login() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[#edf2f7] p-4 sm:p-6">
-      <section className="grid min-h-[580px] w-full max-w-5xl overflow-hidden rounded-[18px] border border-[#dbe3ea] bg-white shadow-[0_26px_70px_rgba(15,31,61,0.16)] lg:grid-cols-2">
+    <main className="flex min-h-screen items-start justify-center overflow-x-hidden bg-[#edf2f7] p-3 py-6 sm:p-6 lg:items-center">
+      <section className="grid min-h-0 w-full max-w-5xl overflow-hidden rounded-[18px] border border-[#dbe3ea] bg-white shadow-[0_26px_70px_rgba(15,31,61,0.16)] sm:min-h-[580px] lg:grid-cols-2">
         <div className="relative hidden overflow-hidden bg-[#0f1f3d] p-10 text-white lg:flex lg:flex-col">
           <div className="absolute inset-0 opacity-[0.045] [background-image:linear-gradient(rgba(255,255,255,.65)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.65)_1px,transparent_1px)] [background-size:32px_32px]" />
           <div className="relative z-10 flex h-full flex-col">
@@ -144,12 +144,12 @@ export default function Login() {
             </div>
 
             <div className="my-auto max-w-sm">
-              <h1 className="text-[28px] font-semibold leading-tight">
+              <h1 className="break-words text-[28px] font-semibold leading-tight">
                 Air cargo ops,
                 <br />
                 <span className="text-[#1d9e75]">fully in control.</span>
               </h1>
-              <p className="mt-4 max-w-[300px] text-sm leading-7 text-white/55">
+              <p className="mt-4 max-w-[300px] break-words text-sm leading-7 text-white/55">
                 Real-time shipment tracking, revenue intelligence, and document management built for daily logistics operations.
               </p>
               <div className="mt-9 flex gap-7">
@@ -187,7 +187,7 @@ export default function Login() {
             {error ? <div className="mb-4"><ErrorState title="Login failed" message={error} /></div> : null}
             {notice ? (
               <div className="mb-4 rounded-lg border border-[#bbf7d0] bg-[#f0fdf4] px-4 py-3 text-sm font-semibold text-[#166534]">
-                {notice}
+                <span className="break-words">{notice}</span>
               </div>
             ) : null}
 
@@ -207,7 +207,7 @@ export default function Login() {
                   {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
               </div>
-              <div className="-mt-1 flex items-center justify-between gap-3">
+              <div className="-mt-1 flex flex-wrap items-center justify-between gap-3">
                 <button type="button" onClick={openResetPanel} className="text-xs font-semibold text-[#1d9e75] hover:text-[#0f6e56]">
                   Forgot password?
                 </button>
@@ -237,8 +237,8 @@ export default function Login() {
                   </button>
                 </div>
 
-                {resetError ? <p className="mb-3 rounded-md bg-red-50 px-3 py-2 text-xs font-semibold text-red-700">{resetError}</p> : null}
-                {resetMessage ? <p className="mb-3 rounded-md bg-[#ecfdf5] px-3 py-2 text-xs font-semibold text-[#0f766e]">{resetMessage}</p> : null}
+                {resetError ? <p className="mb-3 break-words rounded-md bg-red-50 px-3 py-2 text-xs font-semibold text-red-700">{resetError}</p> : null}
+                {resetMessage ? <p className="mb-3 break-words rounded-md bg-[#ecfdf5] px-3 py-2 text-xs font-semibold text-[#0f766e]">{resetMessage}</p> : null}
 
                 {resetStep === 'request' ? (
                   <form className="space-y-3" onSubmit={handleForgotPassword}>
@@ -269,8 +269,8 @@ export default function Login() {
                       required
                     />
                     {resetForm.token ? (
-                      <p className="rounded-md border border-[#dbe3ea] bg-white px-3 py-2 text-xs text-[#64748b]">
-                        Current code: <span className="font-mono font-semibold text-[#172033]">{resetForm.token}</span>
+                      <p className="break-words rounded-md border border-[#dbe3ea] bg-white px-3 py-2 text-xs text-[#64748b]">
+                        Current code: <span className="break-all font-mono font-semibold text-[#172033]">{resetForm.token}</span>
                       </p>
                     ) : null}
                     <Input
@@ -289,7 +289,7 @@ export default function Login() {
                       minLength={8}
                       required
                     />
-                    <div className="grid gap-2 sm:grid-cols-2">
+                    <div className="grid min-w-0 gap-2 sm:grid-cols-2">
                       <Button type="button" variant="secondary" onClick={() => setResetStep('request')}>
                         Back
                       </Button>
@@ -315,13 +315,13 @@ export default function Login() {
                   key={user.email}
                   type="button"
                   onClick={() => setForm({ email: user.email, password: 'password' })}
-                  className="flex w-full items-center gap-3 rounded-lg border border-[#dbe3ea] bg-[#f8fafc] px-3 py-2 text-left transition hover:border-[#cbd5e1] hover:bg-white"
+                  className="flex w-full min-w-0 items-center gap-3 rounded-lg border border-[#dbe3ea] bg-[#f8fafc] px-3 py-2 text-left transition hover:border-[#cbd5e1] hover:bg-white"
                 >
                   <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white" style={{ background: user.color }}>
                     {user.initials}
                   </span>
                   <span className="min-w-0 flex-1">
-                    <span className="block truncate text-xs font-semibold text-[#172033]">{user.email}</span>
+                    <span className="block break-all text-xs font-semibold text-[#172033]">{user.email}</span>
                     <span className="mt-0.5 block truncate text-[11px] text-[#94a3b8]">{user.role}</span>
                   </span>
                   <ArrowRight className="h-4 w-4 text-[#94a3b8]" />
@@ -329,7 +329,7 @@ export default function Login() {
               ))}
             </div>
 
-            <p className="mt-5 inline-flex items-center gap-2 text-xs text-[#64748b]">
+            <p className="mt-5 inline-flex flex-wrap items-center gap-2 text-xs text-[#64748b]">
               <ShieldCheck className="h-4 w-4 text-[#1d9e75]" />
               JWT protected demo access
             </p>

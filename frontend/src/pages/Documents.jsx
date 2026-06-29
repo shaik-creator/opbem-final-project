@@ -53,7 +53,7 @@ export default function Documents() {
   return (
     <div className="space-y-6">
       <PageHeader title="Document Management" description="Upload metadata, verify shipment documents, record rejected reasons, and clear documentation blockers." actions={<Button variant="secondary" icon={RefreshCw} onClick={() => loadBookings()}>Refresh</Button>} />
-      <div className="grid gap-4 md:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <SummaryCard title="Document slots" value={documentStats.total} description="Checklist records" icon={FileWarning} />
         <SummaryCard title="Pending bookings" value={bookings.length} description="With open document work" icon={FileWarning} tone="#d97706" />
         <SummaryCard title="Verified" value={documentStats.verified} description="Loaded in checklist" icon={CheckCircle2} tone="#059669" />
@@ -61,8 +61,8 @@ export default function Documents() {
       </div>
 
       <div className="flex flex-wrap gap-3 rounded-lg border border-gray-200 bg-white p-4 shadow-card">
-        <Input label="Search booking" className="min-w-64 flex-1" value={query} onChange={(e) => setQuery(e.target.value)} />
-        <select className="h-10 self-end rounded-md border border-gray-300 bg-white px-3 text-sm text-gray-900" value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
+        <Input label="Search booking" className="min-w-0 flex-1 sm:min-w-64" value={query} onChange={(e) => setQuery(e.target.value)} />
+        <select className="h-10 w-full min-w-0 self-end rounded-md border border-gray-300 bg-white px-3 text-sm text-gray-900 sm:w-auto" value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
           <option value="">All document bookings</option>
           <option value="Documents Pending">Documents Pending</option>
           <option value="Customs Hold">Customs Hold</option>
@@ -79,7 +79,7 @@ export default function Documents() {
       {loading ? (
         <LoadingState rows={6} message="Loading documents..." />
       ) : (
-        <div className="grid gap-6 xl:grid-cols-[380px_1fr]">
+        <div className="grid gap-6 xl:grid-cols-[minmax(0,380px)_minmax(0,1fr)]">
           <div className="rounded-lg border border-gray-200 bg-white shadow-card">
             <div className="border-b border-gray-200 px-4 py-3">
               <h2 className="text-sm font-semibold text-gray-900">Bookings With Pending Documents</h2>
@@ -89,14 +89,15 @@ export default function Documents() {
                 visibleBookings.map((booking) => (
                   <button
                     key={booking.id}
+                    type="button"
                     className={`block w-full border-b border-gray-100 px-4 py-3 text-left text-sm hover:bg-gray-50 ${selected?.id === booking.id ? 'bg-brand-50' : ''}`}
                     onClick={() => setSelected(booking)}
                   >
                     <div className="flex items-center justify-between gap-2">
-                      <span className="font-semibold text-gray-900">{booking.booking_id}</span>
+                      <span className="min-w-0 break-words font-semibold text-gray-900">{booking.booking_id}</span>
                       <StatusBadge status={booking.shipment_status} />
                     </div>
-                    <p className="mt-1 text-gray-600">{booking.company_name}</p>
+                    <p className="mt-1 break-words text-gray-600">{booking.company_name}</p>
                     <p className="mt-1 text-xs text-gray-500">Expected {formatDate(booking.expected_delivery_date)}</p>
                   </button>
                 ))

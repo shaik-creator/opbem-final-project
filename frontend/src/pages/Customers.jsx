@@ -77,7 +77,7 @@ export default function Customers() {
         actions={<><Button variant="secondary" icon={RefreshCw} onClick={() => loadCustomers()}>Refresh</Button><Button icon={Plus} onClick={() => setCreating(true)}>New customer</Button></>}
       />
 
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <SummaryCard title="Customers" value={customers.length} description="Active customer records" icon={UsersRound} trend={[2, 3, 5, customers.length]} />
         <SummaryCard title="Total bookings" value={totals.bookings} description="Across listed customers" icon={Building2} tone="#059669" trend={[1, 4, 6, totals.bookings]} />
         <SummaryCard title="Pending payments" value={formatCurrency(totals.pending)} description="Outstanding customer balance" icon={Phone} tone="#d97706" trend={[1, 2, 1, totals.pending / 1000]} />
@@ -97,7 +97,7 @@ export default function Customers() {
       ) : customers.length ? (
         <div className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-card">
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200 text-sm">
+            <table className="min-w-[820px] divide-y divide-gray-200 text-sm">
               <thead className="bg-gray-50 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
                 <tr>
                   <th className="px-4 py-3">Customer</th>
@@ -112,12 +112,12 @@ export default function Customers() {
                 {customers.map((customer) => (
                   <tr key={customer.id} className="hover:bg-gray-50">
                     <td className="px-4 py-3">
-                      <Link to={`/customers/${customer.id}`} className="font-semibold text-brand-700 hover:underline">{customer.customer_name}</Link>
-                      <p className="text-xs text-gray-500">{customer.company_name} {customer.city ? `- ${customer.city}` : ''}</p>
+                      <Link to={`/customers/${customer.id}`} className="break-words font-semibold text-brand-700 hover:underline">{customer.customer_name}</Link>
+                      <p className="break-words text-xs text-gray-500">{customer.company_name} {customer.city ? `- ${customer.city}` : ''}</p>
                     </td>
                     <td className="px-4 py-3 text-gray-600">
-                      <div className="flex items-center gap-1"><Mail className="h-3.5 w-3.5" /> {customer.email || '-'}</div>
-                      <div className="mt-1 flex items-center gap-1"><Phone className="h-3.5 w-3.5" /> {customer.phone || '-'}</div>
+                      <div className="flex min-w-0 items-center gap-1 break-words"><Mail className="h-3.5 w-3.5 shrink-0" /> {customer.email || '-'}</div>
+                      <div className="mt-1 flex min-w-0 items-center gap-1 break-words"><Phone className="h-3.5 w-3.5 shrink-0" /> {customer.phone || '-'}</div>
                     </td>
                     <td className="px-4 py-3">{customer.booking_count || 0}</td>
                     <td className="px-4 py-3">{formatCurrency(customer.total_revenue)}</td>
@@ -134,13 +134,13 @@ export default function Customers() {
       )}
 
       <Modal title="New customer" open={creating} onClose={() => setCreating(false)}>
-        <form className="grid gap-4 md:grid-cols-2" onSubmit={createCustomer}>
+        <form className="grid min-w-0 gap-4 md:grid-cols-2" onSubmit={createCustomer}>
           <Input label="Customer name" value={form.customer_name} onChange={(e) => setForm({ ...form, customer_name: e.target.value })} required />
           <Input label="Company name" value={form.company_name} onChange={(e) => setForm({ ...form, company_name: e.target.value })} required />
           <Input label="Email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
           <Input label="Phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
           <Input label="City" value={form.city} onChange={(e) => setForm({ ...form, city: e.target.value })} />
-          <div className="flex items-end justify-end md:col-span-2"><Button type="submit" loading={saving}>Save customer</Button></div>
+          <div className="flex flex-wrap items-end justify-end gap-2 md:col-span-2"><Button type="submit" loading={saving}>Save customer</Button></div>
         </form>
       </Modal>
     </div>

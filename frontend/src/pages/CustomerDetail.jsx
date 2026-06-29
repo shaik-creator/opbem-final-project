@@ -43,14 +43,14 @@ export default function CustomerDetail() {
     <div className="space-y-5">
       <PageHeader title="Customer 360" description={`${customer.customer_name} - ${customer.company_name}`} />
       {error ? <ErrorState message={error} onRetry={loadCustomer} /> : null}
-      <div className="grid gap-4 md:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <SummaryCard title="Bookings" value={customer.booking_count || 0} description="Total shipments" icon={PackageCheck} />
         <SummaryCard title="Revenue" value={formatCurrency(customer.total_revenue)} description="Total invoiced" icon={Building2} tone="#059669" />
         <SummaryCard title="Pending payments" value={formatCurrency(customer.pending_payments)} description="Outstanding balance" icon={CreditCard} tone="#d97706" />
         <SummaryCard title="Pending documents" value={customer.pending_documents || 0} description="Open document items" icon={FileWarning} tone="#dc2626" />
       </div>
 
-      <div className="grid gap-5 xl:grid-cols-[360px_1fr]">
+      <div className="grid gap-5 xl:grid-cols-[minmax(0,360px)_minmax(0,1fr)]">
         <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-card">
           <h2 className="text-sm font-semibold text-gray-900">Customer details</h2>
           <dl className="mt-4 space-y-3 text-sm">
@@ -61,9 +61,9 @@ export default function CustomerDetail() {
               ['City', customer.city || '-'],
               ['Created', formatDate(customer.created_at)]
             ].map(([label, value]) => (
-              <div key={label} className="flex justify-between gap-4 border-b border-gray-100 pb-2">
+              <div key={label} className="flex flex-wrap justify-between gap-2 border-b border-gray-100 pb-2">
                 <dt className="text-gray-500">{label}</dt>
-                <dd className="text-right font-medium text-gray-900">{value}</dd>
+                <dd className="break-words text-right font-medium text-gray-900">{value}</dd>
               </div>
             ))}
           </dl>
@@ -74,7 +74,7 @@ export default function CustomerDetail() {
           </div>
           {data.shipments.length ? (
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-100 text-sm">
+              <table className="min-w-[760px] divide-y divide-gray-100 text-sm">
                 <tbody className="divide-y divide-gray-100">
                   {data.shipments.map((shipment) => (
                     <tr key={shipment.id} className="hover:bg-gray-50">

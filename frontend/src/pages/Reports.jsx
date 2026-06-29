@@ -42,33 +42,36 @@ export default function Reports() {
 
       <div className="grid gap-4 md:grid-cols-3 no-print">
         <button
-          className="rounded-lg border border-gray-200 bg-white p-5 text-left shadow-card hover:border-brand-500"
+          type="button"
+          className="min-w-0 rounded-lg border border-gray-200 bg-white p-5 text-left shadow-card hover:border-brand-500"
           onClick={() => downloadFile('/reports/bookings.csv', 'bookings-report.csv')}
         >
           <Download className="h-5 w-5 text-brand-600" />
-          <p className="mt-3 font-semibold text-gray-900">Bookings CSV</p>
-          <p className="mt-1 text-sm text-gray-500">All cargo booking records.</p>
+          <p className="mt-3 break-words font-semibold text-gray-900">Bookings CSV</p>
+          <p className="mt-1 break-words text-sm text-gray-500">All cargo booking records.</p>
         </button>
         <button
-          className="rounded-lg border border-gray-200 bg-white p-5 text-left shadow-card hover:border-brand-500"
+          type="button"
+          className="min-w-0 rounded-lg border border-gray-200 bg-white p-5 text-left shadow-card hover:border-brand-500"
           onClick={() => downloadFile('/reports/revenue.csv', 'revenue-report.csv')}
         >
           <Download className="h-5 w-5 text-brand-600" />
-          <p className="mt-3 font-semibold text-gray-900">Revenue CSV</p>
-          <p className="mt-1 text-sm text-gray-500">Invoice, paid, and balance rows.</p>
+          <p className="mt-3 break-words font-semibold text-gray-900">Revenue CSV</p>
+          <p className="mt-1 break-words text-sm text-gray-500">Invoice, paid, and balance rows.</p>
         </button>
         <button
-          className="rounded-lg border border-gray-200 bg-white p-5 text-left shadow-card hover:border-brand-500"
+          type="button"
+          className="min-w-0 rounded-lg border border-gray-200 bg-white p-5 text-left shadow-card hover:border-brand-500"
           onClick={() => downloadFile('/reports/pending-documents.csv', 'pending-documents-report.csv')}
         >
           <Download className="h-5 w-5 text-brand-600" />
-          <p className="mt-3 font-semibold text-gray-900">Pending Documents CSV</p>
-          <p className="mt-1 text-sm text-gray-500">Open document follow-up rows.</p>
+          <p className="mt-3 break-words font-semibold text-gray-900">Pending Documents CSV</p>
+          <p className="mt-1 break-words text-sm text-gray-500">Open document follow-up rows.</p>
         </button>
       </div>
 
       <div className="rounded-lg border border-gray-200 bg-white shadow-card">
-        <div className="flex items-center justify-between border-b border-gray-200 px-4 py-3">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-gray-200 px-4 py-3">
           <h2 className="text-sm font-semibold text-gray-900">Monthly Summary</h2>
           <Button variant="secondary" icon={RefreshCw} onClick={loadSummary}>
             Refresh
@@ -78,7 +81,7 @@ export default function Reports() {
           <div className="p-4"><LoadingState rows={5} message="Loading monthly report data..." /></div>
         ) : summary.length ? (
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200 text-sm">
+            <table className="min-w-[760px] divide-y divide-gray-200 text-sm">
               <thead className="bg-gray-50 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
                 <tr>
                   <th className="px-4 py-3">Month</th>

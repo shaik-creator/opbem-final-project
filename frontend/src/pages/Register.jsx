@@ -43,10 +43,10 @@ export default function Register() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-gray-100 p-6">
-      <div className="w-full max-w-lg rounded-lg border border-gray-200 bg-white p-8 shadow-card">
-        <h1 className="text-xl font-semibold text-gray-950">Create ORBEM user</h1>
-        <p className="mt-1 text-sm text-gray-500">Account access is role-aware.</p>
+    <main className="flex min-h-screen items-start justify-center overflow-x-hidden bg-gray-100 p-3 py-6 sm:p-6 lg:items-center">
+      <div className="w-full max-w-lg rounded-lg border border-gray-200 bg-white p-5 shadow-card sm:p-8">
+        <h1 className="break-words text-xl font-semibold text-gray-950">Create ORBEM user</h1>
+        <p className="mt-1 break-words text-sm text-gray-500">Account access is role-aware.</p>
         {error ? <div className="mt-4"><ErrorState title="Registration failed" message={error} /></div> : null}
         <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
           <Input label="Name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required />
@@ -58,7 +58,7 @@ export default function Register() {
             Register
           </Button>
         </form>
-        <p className="mt-5 text-sm text-gray-500">
+        <p className="mt-5 break-words text-sm text-gray-500">
           Already registered?{' '}
           <Link to="/login" className="font-medium text-brand-700 hover:text-brand-600">
             Login

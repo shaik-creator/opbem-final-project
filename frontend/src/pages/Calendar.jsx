@@ -68,10 +68,10 @@ export default function Calendar() {
         description="Weekly operations view for deliveries, payment due dates, pickups, dispatches, and document deadlines."
         actions={<Button variant="secondary" icon={RefreshCw} onClick={() => loadEvents()}>Refresh</Button>}
       />
-      <div className="grid gap-3 rounded-lg border border-gray-200 bg-white p-4 shadow-card md:grid-cols-[1fr_1fr_auto]">
+      <div className="grid min-w-0 gap-3 rounded-lg border border-gray-200 bg-white p-4 shadow-card md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto]">
         <Input type="date" label="From" value={range.from} onChange={(e) => setRange({ ...range, from: e.target.value })} />
         <Input type="date" label="To" value={range.to} onChange={(e) => setRange({ ...range, to: e.target.value })} />
-        <div className="flex items-end"><Button onClick={() => loadEvents()}>Apply</Button></div>
+        <div className="flex flex-wrap items-end gap-2"><Button onClick={() => loadEvents()}>Apply</Button></div>
       </div>
       {error ? <ErrorState message={error} onRetry={() => loadEvents()} /> : null}
       {loading ? (
@@ -87,10 +87,10 @@ export default function Calendar() {
                 {rows.map((event, index) => {
                   const Icon = icons[event.event_type] || CalendarDays;
                   return (
-                    <div key={`${event.event_type}-${event.related_id}-${index}`} className="flex items-start gap-3 px-4 py-3">
+                    <div key={`${event.event_type}-${event.related_id}-${index}`} className="flex min-w-0 flex-wrap items-start gap-3 px-4 py-3 sm:flex-nowrap">
                       <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-gray-100 text-brand-700"><Icon className="h-4 w-4" /></div>
                       <div className="min-w-0 flex-1">
-                        <p className="text-sm font-semibold text-gray-900">{event.title}</p>
+                        <p className="break-words text-sm font-semibold text-gray-900">{event.title}</p>
                         <p className="mt-1 text-xs text-gray-500">{event.event_type} {event.event_time ? `- ${event.event_time}` : ''}</p>
                       </div>
                       <StatusBadge status={event.status || event.event_type} />

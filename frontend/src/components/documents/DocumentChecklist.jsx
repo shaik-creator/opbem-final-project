@@ -98,14 +98,14 @@ export default function DocumentChecklist({ bookingId }) {
           const selectedFile = selectedFiles[document.id];
           const fileHref = getFileHref(document);
           return (
-            <div key={document.id} className="grid gap-3 px-4 py-3 text-sm lg:grid-cols-[minmax(0,1.2fr)_150px_minmax(160px,1fr)_auto] lg:items-center">
+            <div key={document.id} className="grid min-w-0 gap-3 px-4 py-3 text-sm lg:grid-cols-[minmax(0,1.2fr)_minmax(120px,150px)_minmax(0,1fr)_auto] lg:items-center">
               <div className="flex min-w-0 items-center gap-3">
                 <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${meta.iconClass}`}>
                   <Icon className="h-4 w-4" />
                 </span>
                 <div className="min-w-0">
-                  <p className="truncate text-xs font-semibold text-[#172033]">{document.document_type}</p>
-                  <p className="mt-0.5 truncate text-[11px] text-[#64748b]">{selectedFile?.name || document.file_name || 'No file uploaded'}</p>
+                  <p className="break-words text-xs font-semibold text-[#172033]">{document.document_type}</p>
+                  <p className="mt-0.5 break-words text-[11px] text-[#64748b]">{selectedFile?.name || document.file_name || 'No file uploaded'}</p>
                 </div>
               </div>
 
@@ -114,15 +114,15 @@ export default function DocumentChecklist({ bookingId }) {
               ) : null}
 
               {canManageDocuments && (
-                <div className="grid gap-2 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto]">
+                <div className="grid min-w-0 gap-2 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto]">
                   <input
-                  className="h-10 rounded-lg border border-[#dbe3ea] px-3 text-xs text-[#172033]"
+                  className="h-10 min-w-0 rounded-lg border border-[#dbe3ea] px-3 text-xs text-[#172033]"
                   value={document.file_name || ''}
                   onChange={(event) => updateLocal(document.id, 'file_name', event.target.value)}
                   placeholder="metadata.pdf"
                 />
                 <input
-                  className="h-10 rounded-lg border border-[#dbe3ea] px-3 text-xs text-[#172033]"
+                  className="h-10 min-w-0 rounded-lg border border-[#dbe3ea] px-3 text-xs text-[#172033]"
                   value={document.remarks || ''}
                   onChange={(event) => updateLocal(document.id, 'remarks', event.target.value)}
                   placeholder="Remarks"
@@ -140,7 +140,7 @@ export default function DocumentChecklist({ bookingId }) {
                 </div>
               )}
 
-              <div className="flex items-center justify-between gap-3 lg:justify-end">
+              <div className="flex flex-wrap items-center justify-between gap-3 lg:justify-end">
                 <StatusBadge status={document.status} />
                 {fileHref ? (
                   <a

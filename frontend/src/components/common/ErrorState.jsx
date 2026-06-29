@@ -9,8 +9,8 @@ export default function ErrorState({ title = 'Unable to load data', message = 'S
           <AlertTriangle className="h-4.5 w-4.5" />
         </span>
         <div className="min-w-0 flex-1 pt-1">
-          <p className="font-semibold text-red-800">{title}</p>
-          <p className="mt-0.5 text-xs leading-5 text-red-700">{message}</p>
+          <p className="break-words font-semibold text-red-800">{title}</p>
+          <p className="mt-0.5 break-words text-xs leading-5 text-red-700">{message}</p>
           {onRetry ? (
             <Button variant="secondary" className="mt-3 text-xs" icon={RefreshCw} onClick={onRetry}>
               Retry

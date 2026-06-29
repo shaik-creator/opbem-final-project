@@ -21,15 +21,15 @@ export default function Button({
     <button
       type={type}
       className={classNames(
-        'inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-60',
+        'inline-flex min-h-10 max-w-full min-w-0 items-center justify-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold leading-tight transition disabled:cursor-not-allowed disabled:opacity-60',
         variants[variant],
         className
       )}
       disabled={loading || props.disabled}
       {...props}
     >
-      {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : Icon ? <Icon className="h-4 w-4" /> : null}
-      <span>{children}</span>
+      {loading ? <Loader2 className="h-4 w-4 shrink-0 animate-spin" /> : Icon ? <Icon className="h-4 w-4 shrink-0" /> : null}
+      <span className="min-w-0 whitespace-normal text-center">{children}</span>
     </button>
   );
 }

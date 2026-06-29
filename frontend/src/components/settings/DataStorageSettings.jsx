@@ -15,17 +15,17 @@ export default function DataStorageSettings({ settings, storageInfo, onClearCach
       </div>
       <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-card">
         <SettingsRow icon={HardDrive} title="Storage information" description="Local browser storage and dashboard assets.">
-          <div className="grid gap-3 md:grid-cols-3">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             <div className="rounded-md border border-gray-200 bg-gray-50 p-3">
-              <p className="text-xs font-medium text-gray-500">Uploaded profile pictures</p>
+              <p className="break-words text-xs font-medium text-gray-500">Uploaded profile pictures</p>
               <p className="mt-1 text-lg font-semibold text-gray-900">{profilePictureCount}</p>
             </div>
             <div className="rounded-md border border-gray-200 bg-gray-50 p-3">
-              <p className="text-xs font-medium text-gray-500">Report exports</p>
+              <p className="break-words text-xs font-medium text-gray-500">Report exports</p>
               <p className="mt-1 text-lg font-semibold text-gray-900">{storageInfo.reportExports}</p>
             </div>
             <div className="rounded-md border border-gray-200 bg-gray-50 p-3">
-              <p className="text-xs font-medium text-gray-500">Cached dashboard data</p>
+              <p className="break-words text-xs font-medium text-gray-500">Cached dashboard data</p>
               <p className="mt-1 text-lg font-semibold text-gray-900">{storageInfo.cachedDashboardData}</p>
             </div>
           </div>
@@ -49,11 +49,11 @@ export default function DataStorageSettings({ settings, storageInfo, onClearCach
         </SettingsRow>
       </div>
       {confirming ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-950/40 p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-gray-950/40 p-4">
           <div className="w-full max-w-md rounded-lg bg-white p-5 shadow-xl">
-            <h2 className="text-base font-semibold text-gray-950">Clear local cache?</h2>
-            <p className="mt-2 text-sm text-gray-500">This removes local dashboard cache and temporary settings data. Your login session is kept.</p>
-            <div className="mt-5 flex justify-end gap-2">
+            <h2 className="break-words text-base font-semibold text-gray-950">Clear local cache?</h2>
+            <p className="mt-2 break-words text-sm text-gray-500">This removes local dashboard cache and temporary settings data. Your login session is kept.</p>
+            <div className="mt-5 flex flex-wrap justify-end gap-2">
               <Button variant="secondary" onClick={() => setConfirming(false)}>Cancel</Button>
               <Button variant="danger" onClick={() => { onClearCache(); setConfirming(false); }}>Clear cache</Button>
             </div>

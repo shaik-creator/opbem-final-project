@@ -65,7 +65,7 @@ export default function PaymentPanel({ payment, onSave, saving = false }) {
 
   return (
     <form onSubmit={submit} className="space-y-4">
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid min-w-0 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <Input label="Quotation amount" type="number" min="0" step="0.01" value={form.quotation_amount} onChange={(e) => update('quotation_amount', e.target.value)} />
         <Input label="Invoice amount" type="number" min="0" step="0.01" value={form.invoice_amount} onChange={(e) => update('invoice_amount', e.target.value)} />
         <Input label="Paid amount" type="number" min="0" step="0.01" value={form.paid_amount} onChange={(e) => update('paid_amount', e.target.value)} />
@@ -78,7 +78,7 @@ export default function PaymentPanel({ payment, onSave, saving = false }) {
       {/* Real-time Summary Card */}
       <div className="rounded-xl border border-gray-200 bg-gray-50/50 p-4 dark:border-gray-800/80 dark:bg-gray-900/30">
         <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-500">Real-time Preview</h4>
-        <div className="mt-3 grid grid-cols-2 gap-4">
+        <div className="mt-3 grid gap-4 sm:grid-cols-2">
           <div>
             <div className="text-[11px] font-medium text-gray-400">Calculated Balance</div>
             <div className="text-base font-bold text-gray-900 dark:text-gray-100">
@@ -101,7 +101,7 @@ export default function PaymentPanel({ payment, onSave, saving = false }) {
         </div>
       </div>
 
-      <div className="flex justify-end">
+      <div className="flex flex-wrap justify-end gap-2">
         <Button type="submit" icon={Save} loading={saving}>
           Save payment
         </Button>

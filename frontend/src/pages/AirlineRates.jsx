@@ -73,7 +73,7 @@ function RateForm({ initial, onSave, saving }) {
 
   return (
     <form onSubmit={submit} className="space-y-4">
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid min-w-0 gap-4 md:grid-cols-2">
         <Input label="Airline" value={form.airline_name} onChange={(e) => update('airline_name', e.target.value)} required />
         <Input label="Rate per kg" type="number" min="0" step="0.01" value={form.rate_per_kg} onChange={(e) => update('rate_per_kg', e.target.value)} required />
         <LocationAutocompleteInput
@@ -103,9 +103,9 @@ function RateForm({ initial, onSave, saving }) {
       </div>
       <label className="block text-sm">
         <span className="mb-1 block font-medium text-gray-700">Notes</span>
-        <textarea className="min-h-20 w-full rounded-md border border-gray-300 px-3 py-2 text-sm" value={form.notes || ''} onChange={(e) => update('notes', e.target.value)} />
+        <textarea className="min-h-20 w-full min-w-0 rounded-md border border-gray-300 px-3 py-2 text-sm" value={form.notes || ''} onChange={(e) => update('notes', e.target.value)} />
       </label>
-      <div className="flex justify-end">
+      <div className="flex flex-wrap justify-end gap-2">
         <Button type="submit" loading={saving}>
           Save rate
         </Button>
@@ -270,10 +270,10 @@ export default function AirlineRates() {
 
       {error ? <ErrorState message={error} onRetry={() => loadRates()} /> : null}
 
-      <div className="grid gap-6 xl:grid-cols-[1fr_420px]">
+      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(0,420px)]">
         <div className="space-y-4">
           <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-card">
-            <div className="grid gap-3 md:grid-cols-3">
+            <div className="grid min-w-0 gap-3 md:grid-cols-3">
               <LocationAutocompleteInput
                 label="Origin"
                 value={filters.origin}
@@ -292,7 +292,7 @@ export default function AirlineRates() {
                 maxLength={12}
                 placeholder="Search city or type code..."
               />
-              <div className="flex items-end">
+              <div className="flex flex-wrap items-end gap-2">
                 <Button icon={Search} onClick={() => loadRates()}>
                   Filter rates
                 </Button>
@@ -305,7 +305,7 @@ export default function AirlineRates() {
           ) : sortedRates.length ? (
             <div className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-card">
               <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200 text-sm">
+                <table className="min-w-[900px] divide-y divide-gray-200 text-sm">
                   <thead className="bg-gray-50 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
                     <tr>
                       <th className="px-4 py-3">Airline</th>
@@ -320,15 +320,15 @@ export default function AirlineRates() {
                   <tbody className="divide-y divide-gray-100">
                     {sortedRates.map((rate) => (
                       <tr key={rate.id}>
-                        <td className="px-4 py-3 font-medium text-gray-900">{rate.airline_name}</td>
-                        <td className="px-4 py-3">{rate.origin_airport} to {rate.destination_airport}</td>
+                        <td className="px-4 py-3 break-words font-medium text-gray-900">{rate.airline_name}</td>
+                        <td className="px-4 py-3 break-words">{rate.origin_airport} to {rate.destination_airport}</td>
                         <td className="px-4 py-3">{formatCurrency(rate.rate_per_kg)}</td>
                         <td className="px-4 py-3">{formatCurrency(rate.fuel_surcharge)}</td>
                         <td className="px-4 py-3">{formatCurrency(rate.handling_charge)}</td>
                         <td className="px-4 py-3">{formatDate(rate.valid_from)} - {formatDate(rate.valid_to)}</td>
                         {isAdmin && (
                           <td className="px-4 py-3">
-                            <div className="flex justify-end gap-2">
+                            <div className="flex flex-wrap justify-end gap-2">
                               <Button variant="secondary" className="h-9 w-9 px-0" onClick={() => setEditing(rate)} aria-label="Edit rate">
                                 <Edit className="h-4 w-4" />
                               </Button>
@@ -394,7 +394,7 @@ export default function AirlineRates() {
             <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-card">
               <h2 className="text-sm font-semibold text-gray-900">CSV Import</h2>
               <textarea
-                className="mt-4 min-h-40 w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
+                className="mt-4 min-h-40 w-full min-w-0 rounded-md border border-gray-300 px-3 py-2 text-sm"
                 value={csvText}
                 onChange={(e) => setCsvText(e.target.value)}
                 placeholder="airline_name,origin_airport,destination_airport,rate_per_kg,fuel_surcharge,handling_charge,valid_from,valid_to,notes"

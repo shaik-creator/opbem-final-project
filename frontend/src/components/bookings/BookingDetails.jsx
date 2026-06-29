@@ -25,7 +25,7 @@ export default function BookingDetails({ booking, milestones = [] }) {
   ];
 
   return (
-    <div className="grid gap-6 xl:grid-cols-[1fr_360px]">
+    <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(0,360px)]">
       <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-card">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
@@ -38,7 +38,7 @@ export default function BookingDetails({ booking, milestones = [] }) {
           {facts.map(([label, value]) => (
             <div key={label} className="rounded-md border border-gray-100 bg-gray-50 px-3 py-2">
               <dt className="text-xs font-medium uppercase tracking-wide text-gray-500">{label}</dt>
-              <dd className="mt-1 text-sm font-medium text-gray-900">{value || '-'}</dd>
+              <dd className="mt-1 break-words text-sm font-medium text-gray-900">{value || '-'}</dd>
             </div>
           ))}
         </dl>

@@ -92,8 +92,8 @@ function Panel({ title, subtitle, icon: Icon, action, children, className = '' }
             </span>
           ) : null}
           <div className="min-w-0">
-            <h2 className="truncate text-sm font-semibold text-[#111827]">{title}</h2>
-            {subtitle ? <p className="mt-0.5 truncate text-xs text-[#64748b]">{subtitle}</p> : null}
+            <h2 className="break-words text-sm font-semibold text-[#111827]">{title}</h2>
+            {subtitle ? <p className="mt-0.5 break-words text-xs text-[#64748b]">{subtitle}</p> : null}
           </div>
         </div>
         {action}
@@ -118,14 +118,14 @@ function KpiCard({ label, value, icon: Icon, tone = 'green', progress = 50, chil
   const width = `${Math.max(6, Math.min(Number(progress) || 0, 100))}%`;
 
   return (
-    <article className="rounded-lg border border-[#dbe3ea] bg-white p-4 shadow-card">
+    <article className="min-w-0 rounded-lg border border-[#dbe3ea] bg-white p-4 shadow-card">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <p className="flex items-center gap-1.5 text-xs font-medium text-[#64748b]">
+          <p className="flex min-w-0 items-center gap-1.5 break-words text-xs font-medium text-[#64748b]">
             {Icon ? <Icon className="h-3.5 w-3.5" /> : null}
             {label}
           </p>
-          <p className="mt-2 truncate text-2xl font-semibold leading-none text-[#111827]">{value}</p>
+          <p className="mt-2 break-words text-2xl font-semibold leading-none text-[#111827]">{value}</p>
           <div className="mt-2 flex min-h-5 flex-wrap items-center gap-1.5 text-xs text-[#64748b]">{children}</div>
         </div>
         {Icon ? (
@@ -172,7 +172,7 @@ function FilterPanel({
         </div>
       </div>
 
-      <div className="grid gap-3 md:grid-cols-4 xl:grid-cols-7">
+      <div className="grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7">
         <Input label="From" type="date" value={filters.dateFrom} onChange={(event) => updateFilter('dateFrom', event.target.value)} />
         <Input label="To" type="date" value={filters.dateTo} onChange={(event) => updateFilter('dateTo', event.target.value)} />
         <Select label="Status" value={filters.status} onChange={(event) => updateFilter('status', event.target.value)}>
@@ -278,7 +278,7 @@ function RecentBookings({ rows }) {
     >
       {rows.length ? (
         <div className="overflow-x-auto">
-          <table className="min-w-full text-left text-sm">
+          <table className="min-w-[760px] text-left text-sm">
             <thead>
               <tr className="border-b border-[#dbe3ea] bg-[#f5f7fa] text-[11px] font-semibold uppercase tracking-wide text-[#64748b]">
                 <th className="px-4 py-3">AWB / Route</th>
@@ -296,7 +296,7 @@ function RecentBookings({ rows }) {
                     <p className="mt-1 text-xs text-[#64748b]">{routeLabel(row)}</p>
                   </td>
                   <td className="px-4 py-3">
-                    <p className="font-medium text-[#111827]">{row.company_name || row.customer_name}</p>
+                    <p className="break-words font-medium text-[#111827]">{row.company_name || row.customer_name}</p>
                     <p className="mt-1 text-xs text-[#64748b]">{row.assigned_owner || 'Unassigned'} / {row.payment_status || 'No payment'}</p>
                   </td>
                   <td className="px-4 py-3 text-[#111827]">{row.chargeable_weight ? `${formatNumber(row.chargeable_weight, 0)} kg` : '-'}</td>
@@ -419,9 +419,9 @@ function OperationsStrip({ operations }) {
             <span className={classNames('flex h-9 w-9 shrink-0 items-center justify-center rounded-lg', style.icon)}>
               <Icon className="h-4 w-4" />
             </span>
-            <span>
+            <span className="min-w-0">
               <span className="block text-lg font-semibold leading-none text-[#111827]">{formatNumber(item.value, 0)}</span>
-              <span className="mt-1 block text-xs text-[#64748b]">{item.label}</span>
+              <span className="mt-1 block break-words text-xs text-[#64748b]">{item.label}</span>
             </span>
           </div>
         );
@@ -613,12 +613,12 @@ export default function Dashboard() {
 
       <OperationsStrip operations={operations} />
 
-      <div className="grid gap-4 xl:grid-cols-[minmax(0,1.55fr)_minmax(340px,0.85fr)]">
+      <div className="grid gap-4 xl:grid-cols-[minmax(0,1.55fr)_minmax(0,0.85fr)]">
         <RevenueChart data={charts.revenue} onExport={exportReport} />
         <StatusBreakdown rows={charts.statuses} operations={operations} />
       </div>
 
-      <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_minmax(360px,0.9fr)]">
+      <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)]">
         <RecentBookings rows={tables.recentBookings || []} />
         <AlertCenter tables={tables} activity={activity} runningAlert={runningAlert} onRunAlertCheck={runAlertCheck} />
       </div>
