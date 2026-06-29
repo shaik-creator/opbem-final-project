@@ -4,7 +4,6 @@ import {
   ArrowLeft,
   Accessibility,
   Bell,
-  Bot,
   Building2,
   Camera,
   CheckCircle2,
@@ -40,7 +39,6 @@ import LoadingState from '../components/common/LoadingState';
 import Select from '../components/common/Select';
 import Toast from '../components/common/Toast';
 import AppearanceSettings from '../components/settings/AppearanceSettings';
-import AssistantSettings from '../components/settings/AssistantSettings';
 import DataStorageSettings from '../components/settings/DataStorageSettings';
 import HelpSupportSettings from '../components/settings/HelpSupportSettings';
 import NotificationSettings from '../components/settings/NotificationSettings';
@@ -68,7 +66,6 @@ const sectionItems = [
   { key: 'privacy', title: 'Privacy', subtitle: 'Staff visibility, permissions, data access', icon: Shield, tone: 'green' },
   { key: 'notifications', title: 'Notifications', subtitle: 'Shipment, document, revenue alerts', icon: Bell, tone: 'amber', indicator: true },
   { key: 'appearance', title: 'Appearance', subtitle: 'Theme, sidebar, density, accent color', icon: Palette, tone: 'violet' },
-  { key: 'assistant', title: 'Assistant', subtitle: 'Chatbot mode, tone, data access', icon: Bot, tone: 'cyan' },
   { key: 'reports', title: 'Reports', subtitle: 'Export defaults, CSV, print settings', icon: FileSpreadsheet, tone: 'blue' },
   { key: 'team', title: 'Team / Workspace', subtitle: 'Staff roles and workspace settings', icon: UsersRound, tone: 'green' },
   { key: 'storage', title: 'Storage and Data', subtitle: 'Cache, local data, upload settings', icon: Database, tone: 'slate' },
@@ -303,7 +300,7 @@ function DetailSettingsView({ item, onBack, children }) {
 function DesktopSettingsShell({ user, profile, items, activeKey, onSelect, children }) {
   const groups = [
     ['Account', ['profile', 'account', 'privacy']],
-    ['Preferences', ['notifications', 'appearance', 'assistant', 'accessibility', 'language']],
+    ['Preferences', ['notifications', 'appearance', 'accessibility', 'language']],
     ['System', ['team', 'storage', 'reports', 'support', 'updates', 'about']]
   ];
   const itemMap = new Map(items.map((item) => [item.key, item]));
@@ -825,8 +822,6 @@ export default function AccountCenterPage() {
   const [profileDirty, setProfileDirty] = useState(false);
   const [ticketSaving, setTicketSaving] = useState(false);
   const [toast, setToast] = useState('');
-  const [aiStatus, setAiStatus] = useState({ providers: [] });
-  const [aiLoading, setAiLoading] = useState(false);
   const [security, setSecurity] = useState(null);
   const [storageInfo, setStorageInfo] = useState(getStorageInfo);
 
@@ -857,15 +852,13 @@ export default function AccountCenterPage() {
     setLoading(true);
     setError('');
     try {
-      const [settingsResponse, aiResponse, securityResponse] = await Promise.all([
+      const [settingsResponse, securityResponse] = await Promise.all([
         settingsService.get(),
-        settingsService.aiStatus().catch(() => ({ providers: [] })),
         settingsService.securitySummary().catch(() => null)
       ]);
       setSettings(settingsResponse.settings);
       setCurrentUser(settingsResponse.user || authUser);
       updateUser?.(settingsResponse.user || authUser);
-      setAiStatus(aiResponse);
       setSecurity(securityResponse);
       storeAppearanceSettings(settingsResponse.settings.appearance);
     } catch (err) {
@@ -898,18 +891,6 @@ export default function AccountCenterPage() {
 
   function handleMainBack() {
     navigate(-1);
-  }
-
-  async function refreshAiStatus() {
-    setAiLoading(true);
-    try {
-      setAiStatus(await settingsService.aiStatus());
-      showToast('AI provider status refreshed.');
-    } catch (err) {
-      setError(getErrorMessage(err));
-    } finally {
-      setAiLoading(false);
-    }
   }
 
   async function handleSettingChange(key, value) {
@@ -957,11 +938,6 @@ export default function AccountCenterPage() {
       .forEach((key) => localStorage.removeItem(key));
     setStorageInfo(getStorageInfo());
     showToast('Local cache cleared.');
-  }
-
-  function clearChatHistory() {
-    localStorage.removeItem('orbem_chat_history');
-    showToast('Local chatbot history cleared.');
   }
 
   function downloadAccountData() {
@@ -1038,15 +1014,6 @@ export default function AccountCenterPage() {
     privacy: <PrivacySettings {...sectionProps} />,
     notifications: <NotificationSettings {...sectionProps} />,
     appearance: <AppearanceSettings {...sectionProps} />,
-    assistant: (
-      <AssistantSettings
-        {...sectionProps}
-        aiStatus={aiStatus}
-        aiLoading={aiLoading}
-        onRefreshAi={refreshAiStatus}
-        onClearChat={clearChatHistory}
-      />
-    ),
     reports: <ReportSettings {...sectionProps} />,
     team: <TeamWorkspacePanel user={currentUser} />,
     storage: (
@@ -1054,7 +1021,6 @@ export default function AccountCenterPage() {
         settings={settings}
         storageInfo={storageInfo}
         onClearCache={clearLocalCache}
-        onClearChat={clearChatHistory}
         onDownloadAccountData={downloadAccountData}
         onExport={exportReport}
       />
@@ -1072,7 +1038,7 @@ export default function AccountCenterPage() {
         <section className="rounded-[24px] border border-[#dbe3ea] bg-white p-5 shadow-card">
           <div className="divide-y divide-gray-100">
             <SettingsRow icon={Info} title="Operations Performance Dashboard" description="Version 1.0.0 for logistics operations management." />
-            <SettingsRow icon={Building2} title={COMPANY_NAME} description="Air cargo, shipment tracking, documents, payments, alerts, reporting, and assistant workflows." />
+            <SettingsRow icon={Building2} title={COMPANY_NAME} description="Air cargo, shipment tracking, documents, payments, alerts, and reporting workflows." />
             <SettingsRow icon={CheckCircle2} title="Demo-ready interface" description="Designed for internship, academic review, and internal operations demonstration." />
           </div>
         </section>

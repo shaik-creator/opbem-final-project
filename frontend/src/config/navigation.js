@@ -1,7 +1,6 @@
 import {
   BarChart3,
   Bell,
-  Bot,
   CheckSquare,
   CreditCard,
   FileText,
@@ -40,7 +39,6 @@ const navigationByRole = {
       items: [
         { to: '/alerts', label: 'Alerts', icon: Bell },
         { to: '/reports', label: 'Reports', icon: BarChart3 },
-        { to: '/assistant', label: 'Assistant', icon: Bot },
         { to: '/settings', label: 'Account Center', icon: Settings, account: true }
       ]
     }
@@ -60,7 +58,6 @@ const navigationByRole = {
       section: 'Support',
       items: [
         { to: '/alerts', label: 'Alerts', icon: Bell },
-        { to: '/assistant', label: 'Assistant', icon: Bot },
         { to: '/profile', label: 'My Profile', icon: UserRound, account: true }
       ]
     }
@@ -80,7 +77,6 @@ const navigationByRole = {
       section: 'Support',
       items: [
         { to: '/alerts', label: 'Alerts', icon: Bell },
-        { to: '/assistant', label: 'Assistant', icon: Bot },
         { to: '/profile', label: 'My Profile', icon: UserRound, account: true }
       ]
     }
@@ -100,7 +96,6 @@ const navigationByRole = {
       section: 'Support',
       items: [
         { to: '/alerts', label: 'Alerts', icon: Bell },
-        { to: '/assistant', label: 'Assistant', icon: Bot },
         { to: '/profile', label: 'My Profile', icon: UserRound, account: true }
       ]
     }

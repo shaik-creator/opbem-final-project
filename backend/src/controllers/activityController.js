@@ -32,11 +32,6 @@ async function derivedActivity(limit) {
      (SELECT 'Alert' AS action_type, title, message AS description,
              'booking' AS related_type, related_booking_id AS related_id, created_at
       FROM notifications)
-     UNION ALL
-     (SELECT 'Assistant' AS action_type, 'Assistant used' AS title, LEFT(message, 180) AS description,
-             'assistant' AS related_type, id AS related_id, created_at
-     FROM chat_messages
-     WHERE role = 'user')
      ORDER BY created_at DESC
      LIMIT ${limit}`
   );

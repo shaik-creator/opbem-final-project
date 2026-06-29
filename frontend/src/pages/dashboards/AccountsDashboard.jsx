@@ -19,7 +19,7 @@ export default function AccountsDashboard() {
         { to: '/revenue', label: 'Update payment', hint: 'Finance' },
         { to: '/customers', label: 'Review customer billing', hint: 'CRM' },
         { to: '/reports', label: 'Export revenue report', hint: 'CSV' },
-        { to: '/assistant', label: 'Ask accounts assistant', hint: 'Help' }
+        { to: '/alerts', label: 'Review payment alerts', hint: 'Alerts' }
       ]}
     />
   );

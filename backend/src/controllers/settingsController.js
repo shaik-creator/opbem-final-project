@@ -14,8 +14,7 @@ const DEFAULT_SETTINGS = {
     showPhone: false,
     showOnlineStatus: true,
     showLastActive: true,
-    allowTaskHistory: true,
-    allowAssistantActivity: true
+    allowTaskHistory: true
   },
   notifications: {
     shipmentDelay: true,
@@ -25,7 +24,6 @@ const DEFAULT_SETTINGS = {
     statusUpdate: true,
     dailySummary: false,
     weeklyRevenue: false,
-    aiSuggestions: true,
     email: false,
     inApp: true,
     browserPush: false,
@@ -48,12 +46,6 @@ const DEFAULT_SETTINGS = {
     twoFactor: false,
     loginAlerts: true,
     deviceHistory: true
-  },
-  assistant: {
-    enabled: true,
-    tone: 'professional',
-    allowDashboardSummary: true,
-    allowCustomerMessages: true
   },
   reports: {
     defaultFormat: 'csv',
@@ -88,7 +80,6 @@ const OPTION_VALUES = {
   'appearance.cardRadius': ['compact', 'rounded', 'large'],
   'appearance.fontSize': ['small', 'medium', 'large'],
   'appearance.accentColor': ['blue', 'green', 'purple', 'orange', 'slate'],
-  'assistant.tone': ['professional', 'short', 'detailed'],
   'reports.defaultFormat': ['csv', 'pdf-ready'],
   'reports.defaultDateRange': ['today', 'this_week', 'this_month', 'custom'],
   'language.preferred': ['en'],
@@ -296,22 +287,6 @@ const updateProfile = asyncHandler(async (req, res) => {
   res.json({ message: 'Profile updated.', user, settings });
 });
 
-const aiStatus = asyncHandler(async (req, res) => {
-  const grokConfigured = Boolean(process.env.GROK_API_KEY);
-  res.json({
-    providers: [
-      {
-        provider: 'Grok API',
-        status: grokConfigured ? 'configured' : 'unavailable',
-        detail: grokConfigured
-          ? `${process.env.GROK_MODEL || 'grok-4.3'} configured on backend`
-          : 'Set GROK_API_KEY in backend/.env'
-      },
-      { provider: 'Rule-based fallback', status: 'connected', detail: 'Always available when Grok is unavailable' }
-    ]
-  });
-});
-
 const securitySummary = asyncHandler(async (req, res) => {
   const user = await loadUser(req.user.id);
   res.json({
@@ -344,6 +319,5 @@ module.exports = {
   updateSetting,
   deleteSetting,
   updateProfile,
-  aiStatus,
   securitySummary
 };

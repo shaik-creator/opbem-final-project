@@ -25,7 +25,6 @@ const AirlineRates = lazy(() => import('./pages/AirlineRates'));
 const Reports = lazy(() => import('./pages/Reports'));
 const Notifications = lazy(() => import('./pages/Notifications'));
 const Settings = lazy(() => import('./pages/Settings'));
-const Assistant = lazy(() => import('./pages/Assistant'));
 const Profile = lazy(() => import('./pages/Profile'));
 const Staff = lazy(() => import('./pages/Staff'));
 const UnauthorizedPage = lazy(() => import('./pages/UnauthorizedPage'));
@@ -75,13 +74,16 @@ export default function App() {
                 <Route path="/airline-rates" element={<ProtectedRoute allowedRoles={ADMIN}><AirlineRates /></ProtectedRoute>} />
                 <Route path="/calendar" element={<ProtectedRoute allowedRoles={ADMIN}><Calendar /></ProtectedRoute>} />
                 <Route path="/reports" element={<ProtectedRoute allowedRoles={ADMIN_ACCOUNTS_OPERATIONS}><Reports /></ProtectedRoute>} />
-                <Route path="/assistant" element={<ProtectedRoute><Assistant /></ProtectedRoute>} />
                 <Route path="/notifications" element={<ProtectedRoute><Notifications /></ProtectedRoute>} />
                 <Route path="/alerts" element={<ProtectedRoute><Notifications /></ProtectedRoute>} />
                 <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
                 <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
                 <Route path="/unauthorized" element={<UnauthorizedPage />} />
               </Route>
+              <Route path="/assistant" element={<Navigate to="/dashboard" replace />} />
+              <Route path="/chat" element={<Navigate to="/dashboard" replace />} />
+              <Route path="/chatbot" element={<Navigate to="/dashboard" replace />} />
+              <Route path="/ai-assistant" element={<Navigate to="/dashboard" replace />} />
               <Route path="*" element={<Navigate to="/dashboard" replace />} />
             </Routes>
           </Suspense>

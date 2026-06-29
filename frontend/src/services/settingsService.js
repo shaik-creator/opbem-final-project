@@ -15,8 +15,7 @@ export const defaultSettings = {
     showPhone: false,
     showOnlineStatus: true,
     showLastActive: true,
-    allowTaskHistory: true,
-    allowAssistantActivity: true
+    allowTaskHistory: true
   },
   notifications: {
     shipmentDelay: true,
@@ -26,7 +25,6 @@ export const defaultSettings = {
     statusUpdate: true,
     dailySummary: false,
     weeklyRevenue: false,
-    aiSuggestions: true,
     email: false,
     inApp: true,
     browserPush: false,
@@ -49,12 +47,6 @@ export const defaultSettings = {
     twoFactor: false,
     loginAlerts: true,
     deviceHistory: true
-  },
-  assistant: {
-    enabled: true,
-    tone: 'professional',
-    allowDashboardSummary: true,
-    allowCustomerMessages: true
   },
   reports: {
     defaultFormat: 'csv',
@@ -167,7 +159,6 @@ export const settingsService = {
       settings: mergeSettings(defaultSettings, response.data.settings || {})
     };
   },
-  aiStatus: () => api.get('/settings/ai-status').then((response) => response.data),
   securitySummary: () => api.get('/settings/security-summary').then((response) => response.data)
 };
 

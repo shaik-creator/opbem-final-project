@@ -19,7 +19,7 @@ export default function OperationsDashboard() {
         { to: '/bookings', label: 'Create or update booking', hint: 'Ops' },
         { to: '/shipments', label: 'Update shipment status', hint: 'Live' },
         { to: '/documents', label: 'Resolve documents', hint: 'Docs' },
-        { to: '/assistant', label: 'Ask operations assistant', hint: 'Help' }
+        { to: '/alerts', label: 'Review operational alerts', hint: 'Alerts' }
       ]}
     />
   );

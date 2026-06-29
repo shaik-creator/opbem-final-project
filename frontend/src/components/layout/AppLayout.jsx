@@ -2,15 +2,12 @@ import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Topbar from './Topbar';
-import ChatbotButton from '../assistant/ChatbotButton';
-import ChatbotPanel from '../assistant/ChatbotPanel';
 import { APPEARANCE_EVENT, applyAppearanceSettings, getStoredAppearanceSettings } from '../../services/settingsService';
 import ServerWarmupBanner from '../common/ServerWarmupBanner';
 
 export default function AppLayout() {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(() => getStoredAppearanceSettings().sidebarMode === 'compact');
-  const [assistantOpen, setAssistantOpen] = useState(false);
   const [appearance, setAppearance] = useState(getStoredAppearanceSettings);
 
   useEffect(() => {
@@ -28,14 +25,6 @@ export default function AppLayout() {
       window.removeEventListener(APPEARANCE_EVENT, handleAppearance);
       window.removeEventListener('storage', handleAppearance);
     };
-  }, []);
-
-  useEffect(() => {
-    function openAssistant() {
-      setAssistantOpen(true);
-    }
-    window.addEventListener('orbem:open-assistant', openAssistant);
-    return () => window.removeEventListener('orbem:open-assistant', openAssistant);
   }, []);
 
   const collapsed = sidebarCollapsed;
@@ -63,8 +52,6 @@ export default function AppLayout() {
           </div>
         </main>
       </div>
-      <ChatbotButton onClick={() => setAssistantOpen(true)} />
-      <ChatbotPanel open={assistantOpen} onClose={() => setAssistantOpen(false)} />
     </div>
   );
 }

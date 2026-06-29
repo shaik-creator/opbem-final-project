@@ -11,7 +11,6 @@ const labels = {
   'airline-rates': 'Rates',
   calendar: 'Calendar',
   reports: 'Reports',
-  assistant: 'AI Assistant',
   notifications: 'Alerts',
   profile: 'Profile',
   settings: 'Settings',

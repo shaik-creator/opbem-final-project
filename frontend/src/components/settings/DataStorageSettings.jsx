@@ -1,9 +1,9 @@
-import { Database, Download, Eraser, FileDown, HardDrive, Trash2 } from 'lucide-react';
+import { Database, Download, Eraser, FileDown, HardDrive } from 'lucide-react';
 import { useState } from 'react';
 import Button from '../common/Button';
 import SettingsRow from './SettingsRow';
 
-export default function DataStorageSettings({ settings, storageInfo, onClearCache, onClearChat, onDownloadAccountData, onExport }) {
+export default function DataStorageSettings({ settings, storageInfo, onClearCache, onDownloadAccountData, onExport }) {
   const [confirming, setConfirming] = useState(false);
   const profilePictureCount = settings.profile?.avatarUrl ? 1 : 0;
 
@@ -11,7 +11,7 @@ export default function DataStorageSettings({ settings, storageInfo, onClearCach
     <div className="space-y-4">
       <div>
         <h1 className="text-xl font-semibold text-gray-950">Data & Storage</h1>
-        <p className="mt-1 text-sm text-gray-500">Manage local cache, exports, chatbot history, and account data.</p>
+        <p className="mt-1 text-sm text-gray-500">Manage local cache, exports, and account data.</p>
       </div>
       <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-card">
         <SettingsRow icon={HardDrive} title="Storage information" description="Local browser storage and dashboard assets.">
@@ -35,7 +35,6 @@ export default function DataStorageSettings({ settings, storageInfo, onClearCach
         <SettingsRow icon={Database} title="Local data actions" description="Clear browser-side data without affecting your login session.">
           <div className="flex flex-wrap gap-2">
             <Button variant="secondary" icon={Eraser} onClick={() => setConfirming(true)}>Clear local cache</Button>
-            <Button variant="secondary" icon={Trash2} onClick={onClearChat}>Clear chatbot local history</Button>
             <Button variant="secondary" icon={Download} onClick={onDownloadAccountData}>Download my account data</Button>
           </div>
         </SettingsRow>

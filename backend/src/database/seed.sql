@@ -191,11 +191,3 @@ INSERT INTO staff_activity (user_id, action, module, action_type, title, entity_
 (2, 'Updated', 'Shipment', 'Update', 'Shipment status updated', 'shipment', 4, 'Delay status reviewed.', 'booking', 4, '2026-06-10 10:30:00'),
 (3, 'Verified', 'Document', 'Verify', 'Invoice verified', 'document', 2, 'Commercial invoice checked.', 'booking', 3, '2026-06-10 11:00:00'),
 (5, 'Updated', 'Revenue', 'Update', 'Payment received', 'payment', 17, 'Payment marked as paid.', 'booking', 17, '2026-06-10 14:20:00');
-
-INSERT INTO chat_messages (user_id, role, message, metadata) VALUES
-(1, 'user', 'Summarize delayed shipments.', JSON_OBJECT('source', 'seed')),
-(1, 'assistant', 'There are delayed shipments requiring follow-up, led by ORB-2026-0004 and ORB-2026-0009. Check carrier capacity and customer updates first.', JSON_OBJECT('provider', 'rule-based'));
-
-INSERT INTO assistant_messages (user_id, role, message) VALUES
-(1, 'user', 'How much revenue this month?'),
-(1, 'assistant', 'Assistant is running in local mode.\n\nCurrent dashboard revenue comes from paid payment rows in MySQL.');

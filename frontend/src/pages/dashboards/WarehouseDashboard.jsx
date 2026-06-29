@@ -19,7 +19,7 @@ export default function WarehouseDashboard() {
         { to: '/shipments', label: 'Update warehouse status', hint: 'Cargo' },
         { to: '/documents', label: 'Upload warehouse docs', hint: 'Docs' },
         { to: '/tasks', label: 'Open task board', hint: 'Tasks' },
-        { to: '/assistant', label: 'Ask warehouse assistant', hint: 'Help' }
+        { to: '/alerts', label: 'Review warehouse alerts', hint: 'Alerts' }
       ]}
     />
   );

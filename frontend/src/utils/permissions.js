@@ -13,7 +13,6 @@ const permissions = {
     'document.view',
     'document.upload',
     'alert.view.operations',
-    'assistant.use.operations',
     'task.assign.alert',
     'profile.edit'
   ],
@@ -27,7 +26,6 @@ const permissions = {
     'customer.edit.billing',
     'report.revenue',
     'alert.view.payments',
-    'assistant.use.accounts',
     'profile.edit'
   ],
 
@@ -39,7 +37,6 @@ const permissions = {
     'document.upload',
     'task.view.warehouse',
     'alert.view.warehouse',
-    'assistant.use.warehouse',
     'task.assign.alert',
     'profile.edit'
   ]

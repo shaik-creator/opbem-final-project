@@ -1,4 +1,4 @@
-import { Bell, CalendarClock, Clock, CreditCard, FileWarning, PackagePlus, RefreshCw, Ship, Sparkles } from 'lucide-react';
+import { Bell, CalendarClock, Clock, CreditCard, FileWarning, PackagePlus, RefreshCw, Ship } from 'lucide-react';
 import Select from '../common/Select';
 import Input from '../common/Input';
 import SettingsRow from './SettingsRow';
@@ -12,7 +12,6 @@ const toggleRows = [
   ['notifications.statusUpdate', RefreshCw, 'Booking status update alerts', 'Notify on important shipment milestone changes.'],
   ['notifications.dailySummary', CalendarClock, 'Daily operations summary', 'Morning snapshot of delayed shipments, documents, and payments.'],
   ['notifications.weeklyRevenue', CreditCard, 'Weekly revenue summary', 'Weekly view of invoice, received, and pending balances.'],
-  ['notifications.aiSuggestions', Sparkles, 'AI assistant suggestions', 'Suggestions from ORBEM Ops Assistant when useful.'],
   ['notifications.email', Bell, 'Email notifications', 'Send selected operations alerts to your email.'],
   ['notifications.inApp', Bell, 'In-app notifications', 'Show notifications inside the dashboard.'],
   ['notifications.browserPush', Bell, 'Push / browser alerts', 'Allow browser-level alerts for urgent operations items.']

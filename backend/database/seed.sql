@@ -225,23 +225,6 @@ SELECT user_id, action_type, title, description, related_type, related_id, creat
 FROM staff_activity;
 
 -- ========================================
--- Insert Assistant Messages (Sample)
--- ========================================
-INSERT INTO assistant_messages (id, user_id, role, message) VALUES
-(1, 1, 'user', 'How many bookings do we have?'),
-(2, 1, 'assistant', 'You have a total of 20 bookings in the system. 10 are completed/delivered, 8 are currently in transit, and 2 are pending.'),
-(3, 1, 'user', 'What is the current revenue status?'),
-(4, 1, 'assistant', 'Current month revenue: ₹11,29,000 (partial + paid). Pending payments: ₹9,45,250. Overdue: ₹1,04,500.'),
-(5, 2, 'user', 'Show me delayed shipments'),
-(6, 2, 'assistant', 'You have 2 delayed shipments: AWB004 (awaiting customs) and AWB012 (border checkpoint).'),
-(7, 2, 'user', 'What about pending documents?'),
-(8, 2, 'assistant', 'There are 8 pending documents that need attention, mostly export permits and customs declarations.');
-
-INSERT INTO chat_messages (user_id, role, message, metadata, created_at)
-SELECT user_id, role, message, JSON_OBJECT('source', 'seed'), created_at
-FROM assistant_messages;
-
--- ========================================
 -- Insert Settings
 -- ========================================
 INSERT INTO user_settings (id, user_id, setting_key, setting_value) VALUES
@@ -292,8 +275,6 @@ ALTER TABLE alerts AUTO_INCREMENT = 11;
 ALTER TABLE notifications AUTO_INCREMENT = 11;
 ALTER TABLE staff_activity AUTO_INCREMENT = 11;
 ALTER TABLE activity_logs AUTO_INCREMENT = 11;
-ALTER TABLE assistant_messages AUTO_INCREMENT = 9;
-ALTER TABLE chat_messages AUTO_INCREMENT = 9;
 ALTER TABLE staff AUTO_INCREMENT = 6;
 ALTER TABLE airline_rates AUTO_INCREMENT = 9;
 

@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import {
   AlertCircle,
   BellRing,
-  Bot,
   CalendarClock,
   CheckCircle2,
   Clock,
@@ -169,7 +168,6 @@ function FilterPanel({
         <div className="flex flex-wrap gap-2">
           <Button variant="secondary" icon={PackagePlus} onClick={() => navigate('/bookings/new')}>New Booking</Button>
           <Button variant="secondary" icon={FileUp} onClick={() => navigate('/documents')}>Upload Document</Button>
-          <Button variant="secondary" icon={Bot} onClick={() => window.dispatchEvent(new Event('orbem:open-assistant'))}>Assistant</Button>
           <Button variant="secondary" icon={Receipt} onClick={exportReport}>Export</Button>
         </div>
       </div>
