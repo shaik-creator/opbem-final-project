@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS staff_activity;
 DROP TABLE IF EXISTS tasks;
 DROP TABLE IF EXISTS calendar_events;
 DROP TABLE IF EXISTS user_settings;
+DROP TABLE IF EXISTS password_reset_tokens;
 DROP TABLE IF EXISTS support_tickets;
 DROP TABLE IF EXISTS notifications;
 DROP TABLE IF EXISTS complaints;
@@ -51,6 +52,18 @@ CREATE TABLE user_settings (
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   UNIQUE KEY unique_user_setting (user_id, setting_key),
   CONSTRAINT fk_user_settings_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE password_reset_tokens (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  token_hash VARCHAR(128) NOT NULL,
+  expires_at DATETIME NOT NULL,
+  used_at DATETIME NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_password_reset_user (user_id),
+  INDEX idx_password_reset_token (token_hash),
+  CONSTRAINT fk_password_reset_tokens_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE customers (
