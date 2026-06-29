@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
-const { testConnection } = require('./config/db');
+const { query, testConnection } = require('./config/db');
 const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 
 const authRoutes = require('./routes/authRoutes');
@@ -66,7 +66,13 @@ app.get('/api/health', (req, res) => {
 app.get('/api/health/db', async (req, res, next) => {
   try {
     await testConnection();
-    res.json({ status: 'ok', database: 'connected' });
+    const rows = await query('SELECT COUNT(*) AS count FROM users');
+    res.json({
+      status: 'ok',
+      database: 'connected',
+      usersTable: 'ok',
+      usersCount: rows[0]?.count || 0
+    });
   } catch (error) {
     next(error);
   }
@@ -92,15 +98,26 @@ app.use('/api/calendar', calendarRoutes);
 app.use('/api/uploads', uploadRoutes);
 app.use('/api/staff', staffRoutes);
 
-const frontendDistPath = path.join(__dirname, '../../frontend/dist');
-app.use(express.static(frontendDistPath));
-
-app.get('*', (req, res, next) => {
-  if (req.path.startsWith('/api/')) {
-    return next();
-  }
-  res.sendFile(path.join(frontendDistPath, 'index.html'));
+app.use('/api', (req, res) => {
+  res.status(404).json({
+    success: false,
+    message: `Route not found: ${req.originalUrl}`
+  });
 });
+
+if (process.env.SERVE_FRONTEND === 'true') {
+  const frontendDistPath = path.join(__dirname, '../../frontend/dist');
+  const frontendIndexPath = path.join(frontendDistPath, 'index.html');
+
+  if (fs.existsSync(frontendIndexPath)) {
+    app.use(express.static(frontendDistPath));
+    app.get('*', (req, res) => {
+      res.sendFile(frontendIndexPath);
+    });
+  } else {
+    console.warn(`SERVE_FRONTEND=true but frontend build was not found at ${frontendIndexPath}.`);
+  }
+}
 
 app.use(notFound);
 app.use(errorHandler);
