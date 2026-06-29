@@ -81,7 +81,7 @@ export default function PaymentPanel({ payment, onSave, saving = false }) {
         <div className="mt-3 grid gap-4 sm:grid-cols-2">
           <div>
             <div className="text-[11px] font-medium text-gray-400">Calculated Balance</div>
-            <div className="text-base font-bold text-gray-900 dark:text-gray-100">
+            <div className="break-words text-base font-bold text-gray-900 dark:text-gray-100">
               {formatCurrency(balance)}
             </div>
           </div>

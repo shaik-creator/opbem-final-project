@@ -30,9 +30,9 @@ export default function AppLayout() {
   const collapsed = sidebarCollapsed;
 
   return (
-    <div className="flex h-screen w-full max-w-full overflow-x-hidden bg-[#f6f8fb]">
+    <div className="flex h-[100dvh] min-h-screen w-full max-w-full overflow-hidden bg-[#f6f8fb]">
       <div
-        className="fixed left-0 top-0 z-50 hidden h-screen w-4 lg:block"
+        className="fixed left-0 top-0 z-50 hidden h-[100dvh] min-h-screen w-4 lg:block"
         onMouseEnter={() => setSidebarCollapsed(false)}
         aria-hidden="true"
       />
@@ -43,7 +43,7 @@ export default function AppLayout() {
         onExpand={() => setSidebarCollapsed(false)}
         onCollapse={() => setSidebarCollapsed(true)}
       />
-      <div className="flex h-screen min-w-0 flex-1 flex-col overflow-hidden transition-all duration-300">
+      <div className="flex h-[100dvh] min-h-screen min-w-0 flex-1 flex-col overflow-hidden transition-all duration-300">
         <ServerWarmupBanner />
         <Topbar onMenuClick={() => setMobileSidebarOpen(true)} />
         <main className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden px-3 py-4 sm:px-4 lg:px-7 lg:py-6 orbem-fade-in">

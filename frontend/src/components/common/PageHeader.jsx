@@ -34,7 +34,7 @@ export default function PageHeader({ title, description, actions, statusText = d
               <span className="relative inline-flex h-2 w-2 rounded-full bg-[#1d9e75]" />
             </span>
           </span>
-          {actions ? <div className="flex w-full flex-wrap gap-2 sm:w-auto sm:justify-end">{actions}</div> : null}
+          {actions ? <div className="flex w-full min-w-0 flex-wrap gap-2 sm:w-auto sm:justify-end">{actions}</div> : null}
         </div>
       </div>
     </section>

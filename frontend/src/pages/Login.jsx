@@ -324,7 +324,7 @@ export default function Login() {
                     <span className="block break-all text-xs font-semibold text-[#172033]">{user.email}</span>
                     <span className="mt-0.5 block truncate text-[11px] text-[#94a3b8]">{user.role}</span>
                   </span>
-                  <ArrowRight className="h-4 w-4 text-[#94a3b8]" />
+                  <ArrowRight className="h-4 w-4 shrink-0 text-[#94a3b8]" />
                 </button>
               ))}
             </div>

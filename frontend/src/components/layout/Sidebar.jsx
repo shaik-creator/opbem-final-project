@@ -40,8 +40,8 @@ function SidebarNavItem({ item, collapsed, onClose, accountActive }) {
       className={({ isActive }) => {
         const active = isActive || (item.account && accountActive);
         return classNames(
-          'group relative flex min-h-11 items-center rounded-2xl text-sm font-semibold transition-all duration-200',
-          collapsed ? 'lg:justify-center lg:px-0' : 'gap-3 px-3',
+          'group relative flex min-h-11 items-center gap-3 rounded-2xl px-3 text-sm font-semibold transition-all duration-200',
+          collapsed ? 'lg:justify-center lg:gap-0 lg:px-0' : '',
           active
             ? 'bg-white/[0.14] text-white shadow-[0_12px_28px_rgba(37,99,235,0.22),inset_0_0_0_1px_rgba(255,255,255,0.15)]'
             : 'text-white/60 hover:bg-white/[0.10] hover:text-white'
@@ -97,7 +97,7 @@ export default function Sidebar({ open, collapsed = true, onClose, onExpand, onC
         onMouseEnter={onExpand}
         onMouseLeave={onCollapse}
         className={classNames(
-          'fixed inset-y-0 left-0 z-40 flex h-screen w-[min(278px,calc(100vw-1rem))] shrink-0 transform flex-col overflow-hidden bg-[#071226] text-white shadow-2xl transition-[width,transform] duration-300 ease-out lg:sticky lg:top-0 lg:w-[278px] lg:translate-x-0',
+          'fixed inset-y-0 left-0 z-40 flex h-[100dvh] min-h-screen w-[278px] max-w-[calc(100dvw_-_1rem)] shrink-0 transform flex-col overflow-hidden bg-[#071226] text-white shadow-2xl transition-[width,transform] duration-300 ease-out lg:sticky lg:top-0 lg:w-[278px] lg:translate-x-0',
           collapsed ? 'lg:w-[76px]' : 'lg:w-[278px]',
           open ? 'translate-x-0' : '-translate-x-full'
         )}
@@ -106,7 +106,7 @@ export default function Sidebar({ open, collapsed = true, onClose, onExpand, onC
         <div className="pointer-events-none absolute -right-24 top-28 h-44 w-44 rounded-full bg-[#2563eb]/20 blur-3xl" />
         <div className="pointer-events-none absolute -left-20 bottom-24 h-40 w-40 rounded-full bg-[#1d9e75]/18 blur-3xl" />
 
-        <div className={classNames('relative flex h-[88px] shrink-0 items-center gap-3 border-b border-white/10 transition-all duration-300', collapsed ? 'lg:justify-center lg:px-3' : 'px-5')}>
+        <div className={classNames('relative flex h-[88px] shrink-0 items-center gap-3 border-b border-white/10 px-5 transition-all duration-300', collapsed ? 'lg:justify-center lg:px-3' : '')}>
           <div className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/15 bg-white/[0.12] text-white shadow-[0_16px_36px_rgba(0,0,0,0.18)]">
             <span className="absolute inset-1 rounded-xl bg-gradient-to-br from-[#38bdf8]/30 to-[#1d9e75]/30" />
             <PlaneTakeoff className="relative h-5 w-5" />
@@ -117,7 +117,7 @@ export default function Sidebar({ open, collapsed = true, onClose, onExpand, onC
           </div>
         </div>
 
-        <nav className={classNames('relative min-h-0 flex-1 space-y-3 overflow-y-auto py-4 transition-all duration-300', collapsed ? 'px-2.5' : 'px-3.5')}>
+        <nav className={classNames('relative min-h-0 flex-1 space-y-3 overflow-y-auto px-3.5 py-4 transition-all duration-300', collapsed ? 'lg:px-2.5' : '')}>
           {navGroups.map((group) => (
             <div key={group.section}>
               <div className={classNames('px-3 pb-2 pt-2 text-[10px] font-bold uppercase tracking-[0.20em] text-white/32 transition-all duration-200', collapsed ? 'lg:h-2 lg:overflow-hidden lg:py-0 lg:opacity-0' : 'opacity-100')}>
@@ -144,8 +144,8 @@ export default function Sidebar({ open, collapsed = true, onClose, onExpand, onC
             onClick={onClose}
             className={({ isActive }) =>
               classNames(
-                'group relative flex items-center rounded-2xl border p-2.5 transition-all duration-200',
-                collapsed ? 'lg:justify-center lg:px-2' : 'gap-3',
+                'group relative flex items-center gap-3 rounded-2xl border p-2.5 transition-all duration-200',
+                collapsed ? 'lg:justify-center lg:gap-0 lg:px-2' : '',
                 isActive || accountActive ? 'border-white/18 bg-white/[0.14] shadow-[0_14px_30px_rgba(37,99,235,0.18)]' : 'border-white/10 bg-white/[0.07] hover:bg-white/[0.12]'
               )
             }
@@ -166,7 +166,7 @@ export default function Sidebar({ open, collapsed = true, onClose, onExpand, onC
           <NavLink
             to={settingsTarget}
             onClick={onClose}
-            className={classNames('mt-2 flex min-h-10 items-center rounded-2xl text-sm font-bold text-white/60 transition hover:bg-white/[0.10] hover:text-white', collapsed ? 'lg:justify-center lg:px-0' : 'gap-3 px-3')}
+            className={classNames('mt-2 flex min-h-10 items-center gap-3 rounded-2xl px-3 text-sm font-bold text-white/60 transition hover:bg-white/[0.10] hover:text-white', collapsed ? 'lg:justify-center lg:gap-0 lg:px-0' : '')}
             title={settingsLabel}
           >
             <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-white/[0.06]">

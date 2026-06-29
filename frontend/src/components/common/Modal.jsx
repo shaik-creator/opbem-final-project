@@ -6,7 +6,7 @@ export default function Modal({ title, open, onClose, children, size = 'max-w-3x
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-gray-900/50 p-3 sm:p-4">
-      <div className={`max-h-[90vh] w-full min-w-0 ${size} overflow-hidden rounded-lg bg-white shadow-xl`}>
+      <div className={`max-h-[90vh] w-full min-w-0 max-w-full ${size} overflow-hidden rounded-lg bg-white shadow-xl`}>
         <div className="flex min-w-0 items-center justify-between gap-3 border-b border-gray-200 px-4 py-4 sm:px-5">
           <h2 className="min-w-0 break-words text-base font-semibold text-gray-900">{title}</h2>
           <Button variant="ghost" className="h-9 w-9 px-0" onClick={onClose} aria-label="Close modal">

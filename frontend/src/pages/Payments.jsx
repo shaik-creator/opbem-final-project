@@ -119,9 +119,9 @@ export default function Payments() {
                       <div className="break-words font-medium text-gray-900">{payment.customer_name}</div>
                       <div className="break-words text-xs text-gray-500">{payment.company_name}</div>
                     </td>
-                    <td className="px-4 py-3">{formatCurrency(payment.invoice_amount)}</td>
-                    <td className="px-4 py-3">{formatCurrency(payment.paid_amount)}</td>
-                    <td className="px-4 py-3">{formatCurrency(payment.balance_amount)}</td>
+                    <td className="px-4 py-3 break-words">{formatCurrency(payment.invoice_amount)}</td>
+                    <td className="px-4 py-3 break-words">{formatCurrency(payment.paid_amount)}</td>
+                    <td className="px-4 py-3 break-words">{formatCurrency(payment.balance_amount)}</td>
                     <td className="px-4 py-3"><StatusBadge status={payment.payment_status} /></td>
                     <td className="px-4 py-3">{formatDate(payment.due_date)}</td>
                     {canEditRevenue && (

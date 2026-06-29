@@ -346,7 +346,7 @@ function DesktopSettingsShell({ user, profile, items, activeKey, onSelect, child
         </nav>
       </aside>
 
-      <main className="max-h-[calc(100vh-8rem)] overflow-y-auto">
+      <main className="max-h-[calc(100dvh-8rem)] overflow-y-auto">
         {children}
       </main>
     </section>
@@ -1072,7 +1072,7 @@ export default function AccountCenterPage() {
         </div>
       </DesktopSettingsShell>
 
-      <section className="min-h-[calc(100vh-5.25rem)] max-w-full overflow-hidden border border-[#dbe3ea] bg-white shadow-[0_24px_60px_rgba(15,31,61,0.10)] sm:min-h-0 sm:rounded-[30px] lg:hidden">
+      <section className="min-h-[calc(100dvh-5.25rem)] max-w-full overflow-hidden border border-[#dbe3ea] bg-white shadow-[0_24px_60px_rgba(15,31,61,0.10)] sm:min-h-0 sm:rounded-[30px] lg:hidden">
         {showingDetail ? (
           <DetailSettingsView item={activeItem} onBack={showMainSettings}>
             {sections[activeKey]}

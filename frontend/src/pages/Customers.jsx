@@ -116,8 +116,8 @@ export default function Customers() {
                       <p className="break-words text-xs text-gray-500">{customer.company_name} {customer.city ? `- ${customer.city}` : ''}</p>
                     </td>
                     <td className="px-4 py-3 text-gray-600">
-                      <div className="flex min-w-0 items-center gap-1 break-words"><Mail className="h-3.5 w-3.5 shrink-0" /> {customer.email || '-'}</div>
-                      <div className="mt-1 flex min-w-0 items-center gap-1 break-words"><Phone className="h-3.5 w-3.5 shrink-0" /> {customer.phone || '-'}</div>
+                      <div className="flex min-w-0 items-center gap-1"><Mail className="h-3.5 w-3.5 shrink-0" /> <span className="min-w-0 break-all">{customer.email || '-'}</span></div>
+                      <div className="mt-1 flex min-w-0 items-center gap-1"><Phone className="h-3.5 w-3.5 shrink-0" /> <span className="min-w-0 break-words">{customer.phone || '-'}</span></div>
                     </td>
                     <td className="px-4 py-3">{customer.booking_count || 0}</td>
                     <td className="px-4 py-3">{formatCurrency(customer.total_revenue)}</td>

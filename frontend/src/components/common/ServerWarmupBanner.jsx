@@ -55,11 +55,11 @@ export default function ServerWarmupBanner() {
   if (!visible) return null;
 
   return (
-    <div className="relative z-50 flex items-center gap-3 bg-[#0f1f3d] px-4 py-2.5 text-sm text-white">
+    <div className="relative z-50 flex flex-wrap items-center gap-3 bg-[#0f1f3d] px-4 py-2.5 text-sm text-white sm:flex-nowrap">
       <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white/10">
         <Server className="h-4 w-4 text-[#5ee6bb]" />
       </span>
-      <div className="min-w-0 flex-1">
+      <div className="min-w-0 flex-1 break-words">
         <span className="font-semibold text-white">Backend is starting up</span>
         <span className="ml-2 text-white/65">
           The server is waking from sleep — this can take up to 30 seconds on first load.

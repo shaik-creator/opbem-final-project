@@ -190,13 +190,13 @@ export default function LocationAutocompleteInput({
   const shouldShowDropdown = showDropdown && !disabled && (loading || lookupError || predictions.length > 0);
 
   return (
-    <div ref={wrapperRef} className="relative block text-sm">
-      {label ? <label className="mb-1 block font-semibold text-[#344054]">{label}</label> : null}
+    <div ref={wrapperRef} className="relative block min-w-0 max-w-full text-sm">
+      {label ? <label className="mb-1 block break-words font-semibold text-[#344054]">{label}</label> : null}
       <div className="relative">
         <MapPin className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#64748b]" />
         <input
           className={classNames(
-            'h-11 w-full rounded-lg border bg-white py-2 pl-9 pr-10 text-sm text-[#172033] shadow-sm transition placeholder:text-gray-400 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 disabled:cursor-not-allowed disabled:bg-[#f8fafc] disabled:text-[#94a3b8]',
+            'h-11 w-full min-w-0 rounded-lg border bg-white py-2 pl-9 pr-10 text-sm text-[#172033] shadow-sm transition placeholder:text-gray-400 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 disabled:cursor-not-allowed disabled:bg-[#f8fafc] disabled:text-[#94a3b8]',
             fieldError ? 'border-red-400' : 'border-[#dbe3ea]',
             inputClassName
           )}
@@ -219,7 +219,7 @@ export default function LocationAutocompleteInput({
       </div>
 
       {shouldShowDropdown ? (
-        <div className="absolute left-0 right-0 top-[calc(100%+8px)] z-50 max-h-80 overflow-y-auto rounded-2xl border border-[#dbe3ea] bg-white py-2 shadow-[0_18px_45px_rgba(15,31,61,0.18)]">
+        <div className="absolute left-0 right-0 top-[calc(100%+8px)] z-50 max-h-80 max-w-full overflow-y-auto rounded-2xl border border-[#dbe3ea] bg-white py-2 shadow-[0_18px_45px_rgba(15,31,61,0.18)]">
           {loading ? (
             <div className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-[#64748b]">
               <Loader2 className="h-4 w-4 animate-spin" />
@@ -245,8 +245,8 @@ export default function LocationAutocompleteInput({
                   <MapPin className="h-3.5 w-3.5" />
                 </span>
                 <span className="min-w-0">
-                  <span className="block truncate text-sm font-semibold text-[#172033]">{location.name}</span>
-                  {location.address ? <span className="mt-0.5 block truncate text-xs text-[#64748b]">{location.address}</span> : null}
+                  <span className="block break-words text-sm font-semibold text-[#172033]">{location.name}</span>
+                  {location.address ? <span className="mt-0.5 block break-words text-xs text-[#64748b]">{location.address}</span> : null}
                 </span>
               </button>
             ))

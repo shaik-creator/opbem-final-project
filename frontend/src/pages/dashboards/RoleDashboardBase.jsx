@@ -39,12 +39,12 @@ function formatValue(type, value) {
 
 function Panel({ title, action, children }) {
   return (
-    <section className="overflow-hidden rounded-lg border border-[#dbe3ea] bg-white shadow-card">
+    <section className="min-w-0 overflow-hidden rounded-lg border border-[#dbe3ea] bg-white shadow-card">
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#dbe3ea] px-4 py-3">
         <h2 className="min-w-0 break-words text-sm font-semibold text-[#111827]">{title}</h2>
         {action}
       </div>
-      <div className="p-4">{children}</div>
+      <div className="min-w-0 p-4">{children}</div>
     </section>
   );
 }
@@ -69,10 +69,10 @@ function RecentBookings({ rows = [], title = 'Operational queue' }) {
           {rows.slice(0, 6).map((row) => (
             <tr key={row.id} className="hover:bg-[#f8fafc]">
               <td className="px-3 py-2">
-                <Link className="font-semibold text-[#0f1f3d] hover:text-[#1d9e75]" to={`/bookings/${row.id}`}>
+                <Link className="break-words font-semibold text-[#0f1f3d] hover:text-[#1d9e75]" to={`/bookings/${row.id}`}>
                   {row.booking_id || row.awb_number || `#${row.id}`}
                 </Link>
-                <p className="mt-0.5 text-xs text-[#64748b]">
+                <p className="mt-0.5 break-words text-xs text-[#64748b]">
                   {row.origin_airport || '---'} to {row.destination_airport || '---'}
                 </p>
               </td>
@@ -150,8 +150,8 @@ export default function RoleDashboardBase({ title, subtitle, statusText, cards, 
                 to={link.to}
                 className="flex min-w-0 flex-wrap items-center justify-between gap-2 rounded-lg border border-[#dbe3ea] bg-[#f8fafc] px-3 py-2 text-sm font-semibold text-[#172033] transition hover:border-[#b8c7d6] hover:bg-white"
               >
-                {link.label}
-                <span className="text-xs text-[#64748b]">{link.hint}</span>
+                <span className="min-w-0 break-words">{link.label}</span>
+                <span className="break-words text-xs text-[#64748b]">{link.hint}</span>
               </Link>
             ))}
           </div>

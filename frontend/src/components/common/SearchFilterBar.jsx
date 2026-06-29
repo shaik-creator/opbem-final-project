@@ -7,7 +7,7 @@ export default function SearchFilterBar({ value, onChange, onSearch, onClear, pl
     <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-card no-print">
       <div className="grid min-w-0 gap-3 md:grid-cols-[minmax(0,1fr)_auto]">
         <Input label="Search" value={value} onChange={(event) => onChange(event.target.value)} placeholder={placeholder} />
-        <div className="flex flex-wrap items-end gap-2 md:flex-nowrap">
+        <div className="flex flex-wrap items-end gap-2">
           <Button variant="secondary" icon={X} onClick={onClear}>Clear</Button>
           <Button icon={Search} onClick={onSearch}>Search</Button>
         </div>

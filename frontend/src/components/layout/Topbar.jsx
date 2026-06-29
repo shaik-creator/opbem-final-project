@@ -29,7 +29,7 @@ export default function Topbar({ onMenuClick }) {
   }
 
   return (
-    <header className="relative z-20 flex min-h-16 shrink-0 flex-wrap items-center gap-3 border-b border-[#dbe3ea] bg-white/90 px-3 py-3 backdrop-blur-xl sm:flex-nowrap sm:px-4 sm:py-0 lg:px-7">
+    <header className="relative z-20 flex min-h-16 shrink-0 flex-wrap items-center gap-3 border-b border-[#dbe3ea] bg-white/90 px-3 py-3 backdrop-blur-xl sm:px-4 lg:flex-nowrap lg:px-7 lg:py-0">
       {/* Subtle gradient bottom line */}
       <span className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#1d9e75]/30 to-transparent" />
       <button
@@ -41,7 +41,7 @@ export default function Topbar({ onMenuClick }) {
         <Menu className="h-5 w-5" />
       </button>
 
-      <div className="hidden min-w-0 items-center gap-2 sm:flex">
+      <div className="hidden min-w-0 items-center gap-2 md:flex">
         <span className="relative flex h-2.5 w-2.5">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#1d9e75] opacity-50" />
           <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#1d9e75]" />

@@ -116,20 +116,20 @@ export default function DocumentChecklist({ bookingId }) {
               {canManageDocuments && (
                 <div className="grid min-w-0 gap-2 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto]">
                   <input
-                  className="h-10 min-w-0 rounded-lg border border-[#dbe3ea] px-3 text-xs text-[#172033]"
+                  className="h-10 w-full min-w-0 rounded-lg border border-[#dbe3ea] px-3 text-xs text-[#172033]"
                   value={document.file_name || ''}
                   onChange={(event) => updateLocal(document.id, 'file_name', event.target.value)}
                   placeholder="metadata.pdf"
                 />
                 <input
-                  className="h-10 min-w-0 rounded-lg border border-[#dbe3ea] px-3 text-xs text-[#172033]"
+                  className="h-10 w-full min-w-0 rounded-lg border border-[#dbe3ea] px-3 text-xs text-[#172033]"
                   value={document.remarks || ''}
                   onChange={(event) => updateLocal(document.id, 'remarks', event.target.value)}
                   placeholder="Remarks"
                 />
-                <label className="inline-flex h-10 cursor-pointer items-center justify-center gap-2 rounded-lg border border-[#dbe3ea] bg-white px-3 text-xs font-semibold text-[#344054] hover:bg-[#f5f7fb]">
+                <label className="inline-flex h-10 min-w-0 cursor-pointer items-center justify-center gap-2 rounded-lg border border-[#dbe3ea] bg-white px-3 text-xs font-semibold text-[#344054] hover:bg-[#f5f7fb]">
                   <Upload className="h-4 w-4" />
-                  <span>{selectedFile ? 'Change' : 'Upload'}</span>
+                  <span className="min-w-0 break-words">{selectedFile ? 'Change' : 'Upload'}</span>
                   <input
                     type="file"
                     className="sr-only"
@@ -140,14 +140,14 @@ export default function DocumentChecklist({ bookingId }) {
                 </div>
               )}
 
-              <div className="flex flex-wrap items-center justify-between gap-3 lg:justify-end">
+              <div className="flex min-w-0 flex-wrap items-center justify-between gap-3 lg:justify-end">
                 <StatusBadge status={document.status} />
                 {fileHref ? (
                   <a
                     href={fileHref}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex min-h-9 items-center justify-center gap-2 rounded-lg border border-[#dbe3ea] bg-white px-3 text-xs font-semibold text-[#344054] hover:bg-[#f5f7fb]"
+                    className="inline-flex min-h-9 min-w-0 items-center justify-center gap-2 rounded-lg border border-[#dbe3ea] bg-white px-3 text-xs font-semibold text-[#344054] hover:bg-[#f5f7fb]"
                   >
                     <ExternalLink className="h-4 w-4" />
                     View
